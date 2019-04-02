@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+Data/.DS_Store
+rsconnect/
+.DS_Store
+tempfiles/kintreeout.svg
+tempfiles/subdf.txt
+tempfiles/
+www/json/*json
+www/*png
+www/*json
