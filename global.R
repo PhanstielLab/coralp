@@ -36,8 +36,7 @@ source("R/radiobuttonswithimages.R")
 #---------------------- READ IN AND ORGANIZE DATA ----------------------#
 
 # read RDS
-# orig_svginfo = readRDS('Data/phostree3.RDS')
-orig_svginfo = readRDS('Data/phostree3.RDS')
+orig_svginfo = readRDS('Data/phostree.RDS')
 
 # remove NAs from subfamilies
 
@@ -62,7 +61,7 @@ orig_svginfo$dataframe$id.HGNC[NAs] = ""
 
 # add correct header
 # orig_svginfo$header = "<svg viewBox=\"50 -10 800 640\"  preserveAspectRatio=\"xMidYMid meet\"\n
-orig_svginfo$header = "<svg width=\"940\" height=\"940\"\n
+orig_svginfo$header = "<svg width=\"900\" height=\"1080\"\n
 
 xmlns=\"http://www.w3.org/2000/svg\"\n
 xmlns:xlink=\"http://www.w3.org/1999/xlink\" >\n"
@@ -91,8 +90,8 @@ svginfo$dataframe$nodeorder = 1:nrow(svginfo$dataframe)
 svginfo$dataframe$branchorder = 1:nrow(svginfo$dataframe)
 
 # get example RNA data
-rna_data     = paste(readLines("Data/RNAdataP.txt"),collapse="\n")
-rna_abs_data = paste(readLines("Data/RNAdata_pluripotentP.txt"),collapse="\n")
+rna_data     = paste(readLines("Data/RNAdata.txt"),collapse="\n")
+rna_abs_data = paste(readLines("Data/RNAdata_pluripotent.txt"),collapse="\n")
 
 #---------------------- DEFAULT COLORS ----------------------#
 

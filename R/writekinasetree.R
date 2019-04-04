@@ -44,7 +44,7 @@ build.text <- function(l,labelselect)
  
  label = paste("<a xlink:href=\"http://www.uniprot.org/uniprot/",l["id.uniprot"],"\" target=\"_blank\">",
                 "<text id=\"t_x5F_",l["id.coral"],"\" ",
-                "x=\"",  l["text.x"],"\" ",
+                "x=\"", trimws(l["text.x"]),"\" ",
                 "y=\"", trimws(l["text.y"]),"\" ",
                 "font-weight=\"700\" ",
                 " font-size=\"",l["text.size"],"px\" ",
