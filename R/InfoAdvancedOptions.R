@@ -4,7 +4,7 @@ div(id="InfoAdvancedOptionsBox",
         fluidRow(width=12, 
                  column(8,   
                         div(
-                            h2 ("Advanced Settings", style="color:#425e8c; font-size:145%; font-weight:500; margin-bottom: 15px"),
+                            h2 ("Advanced Settings", style="color:#605587; font-size:145%; font-weight:500; margin-bottom: 15px"),
                             "To further illuminate your data and personalize your tree, Coral allows you to
                             add a title, change the font, color, and size of phosphatase labels, refine the appearance of nodes
                             with transparency and strokes, and outline specific nodes of interest."
