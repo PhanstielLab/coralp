@@ -115,7 +115,7 @@ makejson <- function(df,tmp="www/subdf.txt",output="www/kinome_tree.json",BGcol=
   if (labelselect == "HGNC"){label = "id.HGNC"}
   
   # filter df
-  df = df[,c(label,"kinase.group","kinase.family","kinase.subfamily","branch.col","node.col","node.radius","text.size","node.strokecol","node.opacity")]
+  df = df[,c(label,"phosphatase.group","phosphatase.family","phosphatase.subfamily","branch.col","node.col","node.radius","text.size","node.strokecol","node.opacity")]
   
   # write df to file
   write_tsv(df,tmp,col_names = T)
@@ -133,11 +133,11 @@ makejson <- function(df,tmp="www/subdf.txt",output="www/kinome_tree.json",BGcol=
     row<-data[i, ]
     
     # add white spaces
-    group<-row$kinase.group
-    family<-paste0(" ", row$kinase.family)
-    family<-row$kinase.family
-    subfamily<-paste0("  ", row$kinase.subfamily)
-    kinase<-paste0("   ", row[label])
+    group<-row$phosphatase.group
+    family<-paste0(" ", row$phosphatase.family)
+    family<-row$phosphatase.family
+    subfamily<-paste0("  ", row$phosphatase.subfamily)
+    phosphatase<-paste0("   ", row[label])
     branchcol<-row$branch.col 
     nodecol<-row$node.col 
     noderadius<-row$node.radius
@@ -166,16 +166,16 @@ makejson <- function(df,tmp="www/subdf.txt",output="www/kinome_tree.json",BGcol=
       f<-length(root$children[[g]]$children)
     }
     
-    # Determine whether to skip subfamily or not and add kinase
+    # Determine whether to skip subfamily or not and add phosphatase
     if(subfamily == "  ") {
-      root$children[[g]]$children[[f]]$children[[length(root$children[[g]]$children[[f]]$children)+1]]<-list("name"=list(kinase),"branchcol"=list(branchcol) ,"nodecol"=list(nodecol),"noderadius"=list(noderadius),"nodestrokecol"=list(nodestrokecol), "nodeopacity"=list(nodeopacity),"textsize"=list(textsize) )
+      root$children[[g]]$children[[f]]$children[[length(root$children[[g]]$children[[f]]$children)+1]]<-list("name"=list(phosphatase),"branchcol"=list(branchcol) ,"nodecol"=list(nodecol),"noderadius"=list(noderadius),"nodestrokecol"=list(nodestrokecol), "nodeopacity"=list(nodeopacity),"textsize"=list(textsize) )
     } else {
       sf<-match(subfamily, unlist(unlist(root$children[[g]]$children[[f]]$children, F)[names(unlist(root$children[[g]]$children[[f]]$children, F))=="name"]))
       if(is.na(sf)) {
         root$children[[g]]$children[[f]]$children[[length(root$children[[g]]$children[[f]]$children)+1]]<-list("name"=list(subfamily),"branchcol"=list(branchcol) ,"nodecol"=list(subnodecol),"noderadius"=list(defaultnoderadius), "nodestrokecol"=list(subnodestrokecol) , "nodeopacity"=list(nodeopacity),"textsize"=list(textsize) , "children"=list())
         sf<-length(root$children[[g]]$children[[f]]$children)
       }
-      root$children[[g]]$children[[f]]$children[[sf]]$children[[length(root$children[[g]]$children[[f]]$children[[sf]]$children)+1]]<-list("name"=list(kinase),"branchcol"=list(branchcol) ,"nodecol"=list(nodecol),"noderadius"=list(noderadius),"nodestrokecol"=list(nodestrokecol), "nodeopacity"=list(nodeopacity),"textsize"=list(textsize)  )
+      root$children[[g]]$children[[f]]$children[[sf]]$children[[length(root$children[[g]]$children[[f]]$children[[sf]]$children)+1]]<-list("name"=list(phosphatase),"branchcol"=list(branchcol) ,"nodecol"=list(nodecol),"noderadius"=list(noderadius),"nodestrokecol"=list(nodestrokecol), "nodeopacity"=list(nodeopacity),"textsize"=list(textsize)  )
     }
   }
   

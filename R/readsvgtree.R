@@ -268,7 +268,7 @@ conversioncolumn <- function(df,convtable,colname)
 }
 
 
-# Define a function that build a clean data frame from the kinase tree svg
+# Define a function that build a clean data frame from the phosphatase tree svg
 readsvgtree <- function(svgtree,kinmapfile,ensemblfile,entrezfile)
 {
   
@@ -326,9 +326,9 @@ readsvgtree <- function(svgtree,kinmapfile,ensemblfile,entrezfile)
     id.longname = svginfo$dataframe$name,
     
     # phylogeny
-    kinase.group     = svginfo$dataframe$group,
-    kinase.family    = svginfo$dataframe$family,
-    kinase.subfamily = svginfo$dataframe$subfamily,
+    phosphatase.group     = svginfo$dataframe$group,
+    phosphatase.family    = svginfo$dataframe$family,
+    phosphatase.subfamily = svginfo$dataframe$subfamily,
     
     # branch info
     branch.coords    = svginfo$dataframe$branch.coords,
@@ -361,7 +361,7 @@ readsvgtree <- function(svgtree,kinmapfile,ensemblfile,entrezfile)
   svginfo$dataframe = svgallinfoDF
   
   # write new tree
-  writekinasetree(svginfo)
+  writephosphatasetree(svginfo)
   
   # # write RDS file
   saveRDS(svginfo,"Data/kintree.RDS")

@@ -156,7 +156,7 @@ div(id="InfoNodeColorBox",
                                      column(9,
                                             div(  
                                                 h4 (HTML("\u25ce&nbsp; Load default phosphatases groups")),
-                                                "##########################This button will load the default phosphatases groups as defined by Manning et al 2002 into the 'Kinases & Group' 
+                                                "##########################This button will load the default phosphatases groups as defined by Manning et al 2002 into the 'Phosphatases & Group' 
                                                 field. These groups include AGC, CAMK, CK1, CMGC, RGC, STE, TK, and TKL, as well as Atypical and Others 
                                                 which fall outside of those group assignments.#########",
                      

@@ -3,6 +3,6 @@ read.text.input <- function(text.input)
 {
   # extract user info
   recolordf = data.frame(matrix(unlist(strsplit(x=text.input,split="\\s+")),ncol=2,byrow = T),stringsAsFactors = F)
-  colnames(recolordf) = c("kinase","userinfo")
+  colnames(recolordf) = c("phosphatase","userinfo")
   return (recolordf) 
 }

@@ -16,11 +16,11 @@ div(id="InfoAboutBox",
         fluidRow(width=12, 
                  column(9,
                         div(
-                         h2 ("Clear and customizable visualization of human kinome data", 
+                         h2 ("Clear and customizable visualization of human phosphatome data", 
                              style="color:#eceff3; font-weight: 500; font-size: 150%; letter-spacing:.4px"),
                          tags$br(),
                          
-                         h6 ("Coral is a user-friendly interactive web application for visualizing both quantitative and qualitative data. Unlike previous tools, Coral can encode data in three features (node color, node size, and branch color), allows three modes of kinome visualization (the traditional kinome tree as well as radial and dynamic-force networks) and generates high-resolution scalable vector graphic files suitable for publication without the need for refinement in graphic editing software. Due to its user-friendly, interactive, and highly customizable design, Coral is broadly applicable to high-throughput studies of the human kinome.",
+                         h6 ("Coral is a user-friendly interactive web application for visualizing both quantitative and qualitative data. Unlike previous tools, Coral can encode data in three features (node color, node size, and branch color), allows three modes of phosphatome visualization (the traditional phosphatome tree as well as radial and dynamic-force networks) and generates high-resolution scalable vector graphic files suitable for publication without the need for refinement in graphic editing software. Due to its user-friendly, interactive, and highly customizable design, Coral is broadly applicable to high-throughput studies of the human phosphatome.",
                              style="color:#eceff3; font-weight:300; font-size: 110%; line-height: 150%; letter-spacing:.4px")
                         )
                  )
@@ -50,7 +50,7 @@ div(id="InfoAboutBox",
                         h4 ("Code")
                  ),
                  column(10,
-                        h6 ("The code is available at ", tags$a(href="https://github.com/dphansti/CORAL", "Github."))
+                        h6 ("The code is available at ", tags$a(href="https://github.com/PhanstielLab/CORALp", "Github."))
                  )
         ),
         tags$br(),
@@ -72,7 +72,7 @@ div(id="InfoAboutBox",
                         h4 ("Contact")
                  ),
                  column(10,
-                        h6 ("To report issues or make requests, please post an issue on our ", tags$a(href="https://github.com/dphansti/CORAL", "Github repo"),
+                        h6 ("To report issues or make requests, please post an issue on our ", tags$a(href="https://github.com/PhanstielLab/CORALp/issues", "Github repo"),
                             " or ", tags$a(href="mailto:douglas_phanstiel@med.unc.edu", "email us directly."))
                  )
         ),
@@ -85,7 +85,7 @@ div(id="InfoAboutBox",
                         h6 ("Coral was initially described in a preprint by Metz & Deoudes et al available at ", 
                             tags$a(href="https://www.biorxiv.org/content/early/2018/05/25/330274", "bioRxiv",target="_blank")),
                         h6 ("Coral makes use of phylogenetic information derived from ",
-                            tags$a(href="http://science.sciencemag.org/content/298/5600/1912.long","Manning et al, Science, 2002.",target="_blank")),
+                            tags$a(href="https://stke.sciencemag.org/content/10/474/eaag1796/tab-figures-data","Chen et al, Science, 2017.",target="_blank")),
                         h6 ("The Tree plots made by Coral were modified from those created by Cell Signaling Technology: ",
                             tags$a(href="https://www.cellsignal.com/", "www.cellsignal.com")),
                         tags$br(), tags$br(), tags$br()

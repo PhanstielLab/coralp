@@ -1,12 +1,12 @@
 
-# Define a function to create a vector of colors based on selected kinases
+# Define a function to create a vector of colors based on selected phosphatases
 color.by.selected <- function(df,sel,bg.col,sel.col)
 {
 
  # set background color
   color.vector = rep(bg.col,nrow(df))
   
-  # recolor selected kinases
+  # recolor selected phosphatases
   if (length(sel) > 0)
   {
     color.vector[which(df$id.coral %in% sel)] = sel.col
@@ -55,7 +55,7 @@ color.by.group <- function(df,recolordf,colors,bg.col="#D3D3D3",categories=NULL)
     groupcolormapping = c(groupcolormapping,group.color)
     names(groupcolormapping)[length(groupcolormapping)] = group.name
     
-    # get kinases from this group
+    # get phosphatases from this group
     kinsase.from.this.group = recolordf[which(recolordf[,2]==group.name),1]
     
     # update vector of colors
@@ -96,7 +96,7 @@ color.by.value <- function(df ,recolordf ,colors  ,heatrange , bg.col="#D3D3D3")
 # Define a function creates radius vector from values
 resizes.by.value <- function(df, resizedf, sizerange, controlledrange = FALSE, minvalue=0, maxvalue = 5,showall="show")
 {
-  # set values for non supplied kinases
+  # set values for non supplied phosphatases
   radius.vector = rep(0,nrow(df))
   if (showall == "show"){radius.vector = rep(sizerange[1],nrow(df))}
   

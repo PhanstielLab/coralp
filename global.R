@@ -17,7 +17,7 @@ library(svgPanZoom)
 library(colourpicker)
 library(DT)
 
-# load other network libraries
+# load other network libraries  
 library(data.tree)
 library(jsonlite)
 
@@ -25,7 +25,7 @@ library(jsonlite)
 
 source("R/colorby.R")
 source("R/readinput.R")
-source("R/writekinasetree.R")
+source("R/writephosphatasetree.R")
 source("R/legendfunctions.R")
 source("R/map2color.R")
 source("R/convertID.R")
@@ -40,8 +40,8 @@ orig_svginfo = readRDS('Data/phostree.RDS')
 
 # remove NAs from subfamilies
 
-NAs = which(is.na(orig_svginfo$dataframe$kinase.subfamily))
-orig_svginfo$dataframe$kinase.subfamily[NAs] = ""
+NAs = which(is.na(orig_svginfo$dataframe$phosphatase.subfamily))
+orig_svginfo$dataframe$phosphatase.subfamily[NAs] = ""
 
 
 # remove NAs from HGNCs

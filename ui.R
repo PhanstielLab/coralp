@@ -86,12 +86,12 @@ ui <- dashboardPage(title="CORAL",
                                                              # if select
                                                              conditionalPanel(
                                                               condition = "input.branchmanuallyinputmethod == 'browse'",
-                                                              selectInput(inputId = "KinasesManual",label = "Kinases",choices = svginfo$dataframe$id.coral,multiple = TRUE,width = "100%")
+                                                              selectInput(inputId = "PhosphatasesManual",label = "Phosphatases",choices = svginfo$dataframe$id.coral,multiple = TRUE,width = "100%")
                                                              ),
                                                              # if paste
                                                              conditionalPanel(
                                                               condition = "input.branchmanuallyinputmethod == 'paste'",
-                                                              textAreaInput("KinasesManualBranchText", "Kinases", height = "100px",width = "100%",
+                                                              textAreaInput("PhosphatasesManualBranchText", "Phosphatases", height = "100px",width = "100%",
                                                                             value = ""
                                                               )
                                                              ),
@@ -110,15 +110,15 @@ ui <- dashboardPage(title="CORAL",
                                                              ),
                                                              
                                                              # add ability to reverse palette
-                                                             actionButton(inputId = "KinasesManualBranchRevPalette","Reverse Palette",width = "100%")
+                                                             actionButton(inputId = "PhosphatasesManualBranchRevPalette","Reverse Palette",width = "100%")
                                                             ),
                                                             
                                                             # if Categorical
                                                             conditionalPanel(
                                                              condition = "input.branchcolortype == 'Categorical'",
-                                                             prettyCheckbox(inputId="loadexamplebranchgroup",label="load default kinase groups",value = FALSE,shape="round",status="primary"),
+                                                             prettyCheckbox(inputId="loadexamplebranchgroup",label="load default phosphatase groups",value = FALSE,shape="round",status="primary"),
                                                              
-                                                             textAreaInput("branchGroupBox", "Kinases & Category", height = "100px",width = "100%",
+                                                             textAreaInput("branchGroupBox", "Phosphatases & Category", height = "100px",width = "100%",
                                                                            value = ""
                                                              ),
                                                              selectInput(inputId = "branchGroupIDtype",label = "Identifier",
@@ -182,7 +182,7 @@ ui <- dashboardPage(title="CORAL",
                                                              condition = "input.branchcolortype == 'Quantitative'",
                                                              prettyCheckbox(inputId="loadexamplebranchvalue",label="load example data",value = FALSE,shape="round",status="primary"),
                                                              
-                                                             textAreaInput("branchValueBox", "Kinases & Value", height = "100px",width = "100%",
+                                                             textAreaInput("branchValueBox", "Phosphatases & Value", height = "100px",width = "100%",
                                                                            value =  ""
                                                              ),
                                                              
@@ -236,21 +236,21 @@ ui <- dashboardPage(title="CORAL",
                                                              conditionalPanel(
                                                               condition = "input.branchcolorpalettetype == 'manual 2-color'",
                                                               # add ability to reverse palette
-                                                              actionButton(inputId = "KinasesBranchValue2RevPalette","Reverse Palette",width = "100%")
+                                                              actionButton(inputId = "PhosphatasesBranchValue2RevPalette","Reverse Palette",width = "100%")
                                                              ),
                                                              conditionalPanel(
                                                               condition = "input.branchcolorpalettetype == 'manual 3-color'",
                                                               # add ability to reverse palette
-                                                              actionButton(inputId = "KinasesBranchValue3RevPalette","Reverse Palette",width = "100%")
+                                                              actionButton(inputId = "PhosphatasesBranchValue3RevPalette","Reverse Palette",width = "100%")
                                                              ),
                                                              
                                                              tags$br(),
-                                                             prettyRadioButtons(inputId = "BranchValueMissingKinase",label = "Color Missing Kinases",choices = c("automatically","manually"),
+                                                             prettyRadioButtons(inputId = "BranchValueMissingPhosphatase",label = "Color Missing Phosphatases",choices = c("automatically","manually"),
                                                                                 selected = "automatically",inline=TRUE),
                                                              
                                                              conditionalPanel(
-                                                              condition = "input.BranchValueMissingKinase == 'manually'",
-                                                              colourInput(inputId = "BranchValueMissingKinaseColor", "Missing Kinase Color",value = BG_col1,showColour = "both")
+                                                              condition = "input.BranchValueMissingPhosphatase == 'manually'",
+                                                              colourInput(inputId = "BranchValueMissingPhosphataseColor", "Missing Phosphatase Color",value = BG_col1,showColour = "both")
                                                              )
                                                              
                                                             ) # end conditional panel
@@ -283,12 +283,12 @@ ui <- dashboardPage(title="CORAL",
                                                              # if select
                                                              conditionalPanel(
                                                               condition = "input.nodemanuallyinputmethod == 'browse'",
-                                                              selectInput(inputId = "KinasesManualNode",label = "Kinases",choices = svginfo$dataframe$id.coral,multiple = TRUE,width = "100%")
+                                                              selectInput(inputId = "PhosphatasesManualNode",label = "Phosphatases",choices = svginfo$dataframe$id.coral,multiple = TRUE,width = "100%")
                                                              ),
                                                              # if paste
                                                              conditionalPanel(
                                                               condition = "input.nodemanuallyinputmethod == 'paste'",
-                                                              textAreaInput("KinasesManualNodeText", "Kinases", height = "100px",width = "100%",
+                                                              textAreaInput("PhosphatasesManualNodeText", "Phosphatases", height = "100px",width = "100%",
                                                                             value = ""
                                                               )
                                                              ),
@@ -307,14 +307,14 @@ ui <- dashboardPage(title="CORAL",
                                                              ),
                                                              
                                                              # add ability to reverse palette
-                                                             actionButton(inputId = "KinasesManualNodeRevPalette","Reverse Palette",width = "100%")
+                                                             actionButton(inputId = "PhosphatasesManualNodeRevPalette","Reverse Palette",width = "100%")
                                                             ),
                                                             
                                                             # if Categorical
                                                             conditionalPanel(
                                                              condition = "input.nodecolortype == 'Categorical'",
-                                                             prettyCheckbox(inputId="loadexamplennodegroup",label="load default kinase groups",value = FALSE,shape="round",status="primary"),
-                                                             textAreaInput("nodeGroupBox", "Kinases & Category", height = "100px",width = "100%",
+                                                             prettyCheckbox(inputId="loadexamplennodegroup",label="load default phosphatase groups",value = FALSE,shape="round",status="primary"),
+                                                             textAreaInput("nodeGroupBox", "Phosphatases & Category", height = "100px",width = "100%",
                                                                            value =  ""
                                                              ),
                                                              selectInput(inputId = "nodeGroupIDtype",label = "Identifier",
@@ -376,7 +376,7 @@ ui <- dashboardPage(title="CORAL",
                                                             conditionalPanel(
                                                              condition = "input.nodecolortype == 'Quantitative'",
                                                              prettyCheckbox(inputId="loadexamplennodevalue",label="load example data",value = FALSE,shape="round",status="primary"),
-                                                             textAreaInput("nodeValueBox", "Kinases & Value", height = "100px",width = "100%",
+                                                             textAreaInput("nodeValueBox", "Phosphatases & Value", height = "100px",width = "100%",
                                                                            value =  ""
                                                              ),
                                                              selectInput(inputId = "nodeValueIDtype",label = "Identifier",
@@ -428,22 +428,22 @@ ui <- dashboardPage(title="CORAL",
                                                              conditionalPanel(
                                                               condition = "input.nodecolorpalettetype == 'manual 2-color'",
                                                               # add ability to reverse palette
-                                                              actionButton(inputId = "KinasesNodeValue2RevPalette","Reverse Palette",width = "100%")
+                                                              actionButton(inputId = "PhosphatasesNodeValue2RevPalette","Reverse Palette",width = "100%")
                                                              ),
                                                              conditionalPanel(
                                                               condition = "input.nodecolorpalettetype == 'manual 3-color'",
                                                               # add ability to reverse palette
-                                                              actionButton(inputId = "KinasesNodeValue3RevPalette","Reverse Palette",width = "100%")
+                                                              actionButton(inputId = "PhosphatasesNodeValue3RevPalette","Reverse Palette",width = "100%")
                                                              ),
                                                              
                                                              tags$br(),
                                                              div(
-                                                              prettyRadioButtons(inputId = "NodeValueMissingKinase",label = "Color Missing Kinases",choices = c("automatically","manually"),
+                                                              prettyRadioButtons(inputId = "NodeValueMissingPhosphatase",label = "Color Missing Phosphatases",choices = c("automatically","manually"),
                                                                                  selected = "automatically",inline=TRUE),
                                                               
                                                               conditionalPanel(
-                                                               condition = "input.NodeValueMissingKinase == 'manually'",
-                                                               colourInput("NodeValueMissingKinaseColor", "Missing Kinase Color",value = BG_col1,showColour = "both")
+                                                               condition = "input.NodeValueMissingPhosphatase == 'manually'",
+                                                               colourInput("NodeValueMissingPhosphataseColor", "Missing Phosphatase Color",value = BG_col1,showColour = "both")
                                                               )
                                                              )
                                                              
@@ -483,7 +483,7 @@ ui <- dashboardPage(title="CORAL",
                                                              conditionalPanel(
                                                               condition = "input.nodesizetype == 'Quantitative'",
                                                               prettyCheckbox(inputId="loadexamplennodesizevalue",label="load example data",value = FALSE,shape="round",status="primary"),
-                                                              textAreaInput("nodesizeValueBox", "Kinases & Value", height = "100px",width = "100%",
+                                                              textAreaInput("nodesizeValueBox", "Phosphatases & Value", height = "100px",width = "100%",
                                                                             value = ""
                                                               ),
                                                               selectInput(inputId = "nodesizeValueIDtype",label = "Identifier",
@@ -495,7 +495,7 @@ ui <- dashboardPage(title="CORAL",
                                                               sliderInput("nodesizeValueslider",label = "Size Range",value=c(3,9),min = 0, max = 20,step = 0.25),
                                                               
                                                               # how to handle for values not provides
-                                                              prettyRadioButtons(inputId = "nodesizefornotprovidedquantitative", label = "Missing Kinases",
+                                                              prettyRadioButtons(inputId = "nodesizefornotprovidedquantitative", label = "Missing Phosphatases",
                                                                                  choices = c("show","hide")),
                                                               
                                                               prettyCheckbox("Manuallysetdatarange","manually set data range",value = FALSE,shape="round",status="primary"),
@@ -532,7 +532,7 @@ ui <- dashboardPage(title="CORAL",
                                                              condition = "input.AdvancedSections == 'Labels'",
                                                              
                                                              # Choose Label
-                                                             selectInput(inputId = "kinaselabelselect",label = "Label Identifier",
+                                                             selectInput(inputId = "phosphataselabelselect",label = "Label Identifier",
                                                                          choices = c("Default","coralID","uniprot","ensembl","entrez","HGNC"),
                                                                          multiple = FALSE,selected = "Helvetica",width = "100%"),
                                                              
@@ -556,7 +556,7 @@ ui <- dashboardPage(title="CORAL",
                                                              
                                                              # options for manually highlighting labels
                                                              conditionalPanel(condition = "input.fontcolorselect == 'Manual'",
-                                                                    textAreaInput("KinasesManualLabelsText", "Kinases", height = "100px",width = "100%", value = ""),
+                                                                    textAreaInput("PhosphatasesManualLabelsText", "Phosphatases", height = "100px",width = "100%", value = ""),
                                                                               
                                                                     selectInput(inputId = "labelsManualIDtype",label = "Identifier",
                                                                                           choices = c("coralID","uniprot","ensembl","entrez","HGNC"),
@@ -590,7 +590,7 @@ ui <- dashboardPage(title="CORAL",
                                                              ),
                                                              # Node stroke by selected
                                                              conditionalPanel(condition = "input.nodestrokecolselect == 'Selected'",
-                                                                              textAreaInput("NodeStrokeSelect", "Selected Kinases", height = "100px",width = "100%",
+                                                                              textAreaInput("NodeStrokeSelect", "Selected Phosphatases", height = "100px",width = "100%",
                                                                                             value = ""
                                                                               ),
                                                                               selectInput(inputId = "NodeStrokeSelectIDtype",label = "Identifier",
@@ -669,7 +669,7 @@ ui <- dashboardPage(title="CORAL",
                               
                               fluidRow(width=12,
                                        box(width=12, style = "margin-bottom: 45px",
-                                           DT::dataTableOutput("KinaseTable")
+                                           DT::dataTableOutput("PhosphataseTable")
                                        )
                               )
                       ),

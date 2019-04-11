@@ -64,7 +64,7 @@ div(id="InfoBranchColorBox",
         
                             fluidRow(width=12,
                                      column(3, tags$br(), 
-                                            div(img(src="info/BC-2a.png",width="100%",align="left",
+                                            div(img(src="info/BC-2aa.png",width="100%",align="left",
                                                     tags$style("img[src='info/BC-2a.png'] {padding-top: 4px}")                  
                                             )
                                             )
