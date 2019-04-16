@@ -39,7 +39,7 @@ source("R/radiobuttonswithimages.R")
 orig_svginfo = readRDS('Data/phostree.RDS')
 
 # remove NAs from subfamilies
-
+#orig_svginfo$dataframe$phosphatase.subfamily <- NA
 NAs = which(is.na(orig_svginfo$dataframe$phosphatase.subfamily))
 orig_svginfo$dataframe$phosphatase.subfamily[NAs] = ""
 
