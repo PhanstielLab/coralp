@@ -25,7 +25,7 @@ phostree$groups = c("<text transform=\"matrix(1 0 0 1 888.7012 706.4978)\" font-
                     "<text transform=\"matrix(1 0 0 1 405.7498 55.5625)\" font-family=\"'Roboto-Bold'\" letter-spacing=\".035\" font-size=\"22px\">CC1</text>")
 
 
-phostree$dataframe  = as.data.frame(read_tsv('C:\\Users\\amitmin\\Documents\\research\\CoralP\\Data\\PhosphataseTreeNew.tsv'))
+phostree$dataframe  = as.data.frame(read_tsv('C:\\Users\\amitmin\\Documents\\research\\CoralP\\Data\\PhosphataseTreeHGNC.tsv'))
 phostree$title = ""
 
 saveRDS(phostree, file = "C:\\Users\\amitmin\\Documents\\research\\CoralP\\Data\\phostree.RDS")

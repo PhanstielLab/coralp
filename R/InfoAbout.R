@@ -59,8 +59,8 @@ div(id="InfoAboutBox",
                         h4 ("Credit")
                  ),
                  column(10,
-                        h6 ("Coral was developed in the ", tags$a(href="http://phanstiel-lab.med.unc.edu/", "Phanstiel Lab"),
-                            " at UNC by Katie Metz, Erika Deoudes, Matt Berginski, Arman Aksoy, Ivan Jimenez-Ruiz, and Doug Phanstiel."),
+                        h6 ("CoralP was adapated from Coral in the ", tags$a(href="http://phanstiel-lab.med.unc.edu/", "Phanstiel Lab"),
+                            " at UNC by Amit Min and Erika Deodudes."),
                         h6 ("Coral is written in R and relies on the following packages: shiny, shinydashboard, shinyBS, readr, rsvg, shinyWidgets, RColorBrewer."), 
                         h6 ("Circle and Force Layouts are written in javascript using the amazing ",
                             tags$a(href="https://d3js.org/", "D3 library."))
@@ -84,10 +84,8 @@ div(id="InfoAboutBox",
                  column(10, 
                         h6 ("Coral was initially described in a preprint by Metz & Deoudes et al available at ", 
                             tags$a(href="https://www.biorxiv.org/content/early/2018/05/25/330274", "bioRxiv",target="_blank")),
-                        h6 ("Coral makes use of phylogenetic information derived from ",
+                        h6 ("Coral makes use of phylogenetic information and Tree plots derived from ",
                             tags$a(href="https://stke.sciencemag.org/content/10/474/eaag1796/tab-figures-data","Chen et al, Science, 2017.",target="_blank")),
-                        h6 ("The Tree plots made by Coral were modified from those created by Cell Signaling Technology: ",
-                            tags$a(href="https://www.cellsignal.com/", "www.cellsignal.com")),
                         tags$br(), tags$br(), tags$br()
                         
                  )
