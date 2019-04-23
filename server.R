@@ -228,7 +228,9 @@ server <- function(input, output,session) {
     # establish legend
     legend = c()
     # Set initial yoffset
-    yoffset = 79.125
+    
+    # AMIT'S CHANGE yoffset = 79.125
+    yoffset = 25
     
     # get current values
     tempdf$text.size = input$fontsize
@@ -394,6 +396,9 @@ server <- function(input, output,session) {
         tempdf$branchorder = order(abs(tempdf$branch.val), decreasing = FALSE,na.last = FALSE)
 
         # add legend info
+        # AMIT'S CHANGE
+        yoffset = yoffset + 70
+        
         lines_and_offset = build.value.legend(yoffset=yoffset,minval=input$minheat,maxval=input$maxheat, palette=branchcolpalette,elementtype = "Branch",fontfamily = input$fontfamilyselect,subtitle = input$quantvaluenamebranchcolor)
         lines = lines_and_offset[[1]]
         yoffset = lines_and_offset[[2]] + 14
@@ -498,6 +503,7 @@ server <- function(input, output,session) {
         node.group.colormapping = newcolors_and_colormapping[[3]]
         
         # build legend for Branch Color (by group)
+        
         lines_and_offset = build.group.legend(yoffset=yoffset,groupslabels=names(node.group.colormapping),groupcolors=node.group.colormapping,elementtype = "Node",fontfamily = input$fontfamilyselect)
         lines = lines_and_offset[[1]]
         yoffset = lines_and_offset[[2]] + 400
@@ -565,6 +571,11 @@ server <- function(input, output,session) {
         tempdf$nodeorder = order(abs(tempdf$node.val), decreasing = FALSE,na.last = FALSE)
         
         # add legend info
+        # AMIT'S CHANGE
+        if (yoffset < 70){
+          yoffset = yoffset + 70
+        }
+        
         lines_and_offset = build.value.legend(yoffset=yoffset,minval=input$nodeminheat,maxval=input$nodemaxheat, palette=nodecolpalette,elementtype = "Node",fontfamily = input$fontfamilyselect,subtitle = input$quantvaluenamenodecolor)
         lines = lines_and_offset[[1]]
         yoffset = lines_and_offset[[2]] + 14
@@ -632,7 +643,7 @@ server <- function(input, output,session) {
       tempdf$text.col = input$fontcolorchoose
     }
     
-    # Change Color and Size of Font for Selected phosphatases
+    # CHANGE Color and Size of Font for Selected phosphatases
     if (input$fontcolorselect == "Manual")
     {
      selphosphatases = unlist(strsplit(split = "\n",x=input$PhosphatasesManualLabelsText))
