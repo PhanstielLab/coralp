@@ -4,7 +4,7 @@ div(id="InfoNodeColorBox",
         fluidRow(width=12, 
                  column(8,   
                         div(
-                            h2 ("Node Color", style="color:#3889bf; font-size:145%; font-weight:500; margin-bottom: 15px"),
+                            h2 ("Node Color", style="color:#7874d6; font-size:145%; font-weight:500; margin-bottom: 15px"),
                             
                             "Coral allows you to choose between several methods of node color assignment, depending on 
                             the desired look of your tree and the data you intend to visualize.",

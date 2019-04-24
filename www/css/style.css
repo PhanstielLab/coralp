@@ -21,7 +21,11 @@ textarea {
 }
 
 a {
- color: #43bbef;
+ color: #a3a8ff;
+}
+
+a:hover{
+  color: #b6baff;
 }
    
 h1,.h1{
@@ -120,19 +124,19 @@ blockquote{
 }
 
 #InfoBranchColorBox .box-body blockquote{
-   border-left: 4px solid #3da1cc;
+   border-left: 4px solid #878de3;
 }
 
 #InfoNodeColorBox .box-body blockquote{
-   border-left: 4px solid #3889bf;
+   border-left: 4px solid #7874d6;
 }
 
 #InfoNodeSizeBox .box-body blockquote{
-   border-left: 4px solid #3477b3;
+   border-left: 4px solid #6f64bd;
 }
 
 #InfoAdvancedOptionsBox .box-body blockquote{
-   border-left: 4px solid #425e8c;
+   border-left: 4px solid #605587;
 }
 
 /* plot button titles */
@@ -189,22 +193,24 @@ blockquote{
 /* slider bar */
 .js-irs-0 .irs-single, .js-irs-0 .irs-bar-edge, .js-irs-0 .irs-bar, .js-irs-0 .irs-from, .js-irs-0 .irs-to,
 .js-irs-1 .irs-single, .js-irs-1 .irs-bar-edge, .js-irs-1 .irs-bar, .js-irs-1 .irs-from, .js-irs-1 .irs-to{
-  background: #3477b3;
+  background: #6f64bd;
 }
 
 .js-irs-0 .irs-bar, .js-irs-0 .irs-bar-edge,
 .js-irs-1 .irs-bar, .js-irs-1 .irs-bar-edge{
-  border: #3477b3;
+  border: #6f64bd;
 }
 
 .js-irs-2 .irs-single, .js-irs-2 .irs-bar-edge, .js-irs-2 .irs-bar, .js-irs-2 .irs-from, .js-irs-2 .irs-to,
-.js-irs-3 .irs-single, .js-irs-3 .irs-bar-edge, .js-irs-3 .irs-bar, .js-irs-3 .irs-from, .js-irs-3 .irs-to{
-  background: #425e8c;
+.js-irs-3 .irs-single, .js-irs-3 .irs-bar-edge, .js-irs-3 .irs-bar, .js-irs-3 .irs-from, .js-irs-3 .irs-to,
+.js-irs-5 .irs-single, .js-irs-5 .irs-bar-edge, .js-irs-5 .irs-bar, .js-irs-5 .irs-from, .js-irs-5 .irs-to{
+  background: #605587;
 }
 
 .js-irs-2 .irs-bar, .js-irs-2 .irs-bar-edge,
-.js-irs-3 .irs-bar, .js-irs-3 .irs-bar-edge{
-  border: #425e8c;
+.js-irs-3 .irs-bar, .js-irs-3 .irs-bar-edge,
+.js-irs-5 .irs-bar, .js-irs-5 .irs-bar-edge{
+  border: #605587;
 }
 
 .irs-line{
@@ -243,7 +249,7 @@ blockquote{
 /* info-plot radio button */
 .btn.radiobtn.btn-primary{
   color:#eceff3;
-  background: #a3b8cc;
+  background: #b5b1cc;
   border-bottom-color:#eceff3;
   border-left-color:#eceff3;
   border-right-color:#eceff3;
@@ -260,7 +266,7 @@ blockquote{
 }
 
 .btn.radiobtn.btn-primary:hover{
-  background: #99b1c7;
+  background: #aaa9c2;
 }
 
 .btn.radiobtn.btn-primary.active{
@@ -306,7 +312,7 @@ blockquote{
 .box.box-solid.box-primary>.box-header,
 #InfoBranchColorButton.btn.btn-default.action-button.shiny-bound-input{
   color:#fff;
-  background:#3da1cc;
+  background:#878de3;
 }
 
 .box.box-solid.box-primary{
@@ -324,7 +330,7 @@ blockquote{
 .box.box-solid.box-success>.box-header,
 #InfoNodeColorButton.btn.btn-default.action-button.shiny-bound-input{
   color:#fff;
-  background:#3889bf;
+  background:#7874d6;
 }
 
 .box.box-solid.box-success{
@@ -338,7 +344,7 @@ blockquote{
 .box.box-solid.box-info>.box-header,
 #InfoNodeSizeButton.btn.btn-default.action-button.shiny-bound-input{
   color:#fff;
-  background:#3477b3;
+  background:#6f64bd;
 }
 
 .box.box-solid.box-info{
@@ -352,7 +358,7 @@ blockquote{
 .box.box-solid.box-warning>.box-header,
 #InfoAdvancedSettingsButton.btn.btn-default.action-button.shiny-bound-input{
   color:#fff;
-  background:#425e8c;
+  background:#605587;
 }
 
 .box.box-solid.box-warning{
@@ -458,7 +464,7 @@ blockquote{
 
 /* active tab */
 .nav-tabs-custom .nav-tabs li.active {
-     border-top-color: #3da1cc;
+     border-top-color: #878de3;
 }
 
 /* content box */

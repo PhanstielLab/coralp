@@ -4,7 +4,7 @@ div(id="InfoNodeSizeBox",
         fluidRow(width=12, 
                  column(8,   
                         div(
-                            h2 ("Node Size", style="color:#3477b3; font-size:145%; font-weight:500; margin-bottom: 15px"),
+                            h2 ("Node Size", style="color:#6f64bd; font-size:145%; font-weight:500; margin-bottom: 15px"),
                            
                             "Coral also allows you to change node size depending on the desired look of your tree and 
                             the data you intend to visualize.",

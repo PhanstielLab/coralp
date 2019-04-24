@@ -1,7 +1,7 @@
 ## app.R ##
 
 ui <- dashboardPage(title="CORAL",
-                    dashboardHeader(title = tags$a(span(img(src="logos/coral-logo-white2.png",height=60,align="left")),href="http://phanstiel-lab.med.unc.edu/CORAL/"),titleWidth = 600,
+                    dashboardHeader(title = tags$a(span(img(src="logos/coralp-logo-white.png",height=60,align="left")),href="http://phanstiel-lab.med.unc.edu/coralp/"),titleWidth = 600,
                                     
                                     tags$li(class = "dropdown",
                                             tags$style(".main-header {max-height: 60px}"),

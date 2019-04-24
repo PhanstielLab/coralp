@@ -4,7 +4,7 @@ div(id="InfoBranchColorBox",
         fluidRow(width=12, 
                  column(8,   
                         div(
-                            h2 ("Branch Color", style="color:#3da1cc; font-size:145%; font-weight:500; margin-bottom: 15px"),
+                            h2 ("Branch Color", style="color:#878de3; font-size:145%; font-weight:500; margin-bottom: 15px"),
                           
                             "Coral allows you to choose between several methods of branch color assignment, 
                             depending on the desired look of your tree and the data you intend to visualize.",

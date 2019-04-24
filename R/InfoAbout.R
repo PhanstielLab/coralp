@@ -5,8 +5,8 @@ div(id="InfoAboutBox",
         fluidRow(width=12, 
                  column(5,
                         
-                        div(img(src="logos/coral-logo-gray-crop.png",width="100%",align="left"),
-                            tags$style("img[src='logos/coral-logo-gray-crop.png'] 
+                        div(img(src="logos/coralp-logo-gray-crop.png",width="122.5%",align="left"),
+                            tags$style("img[src='logos/coralp-logo-gray-crop.png'] 
                                        {padding-top: 55px; padding-bottom: 5%}"
                             )
                             )
@@ -39,7 +39,7 @@ div(id="InfoAboutBox",
                  column(4,
                         tags$a(href="http://phanstiel-lab.med.unc.edu/images/videos/coral.mp4",target="_blank",
                                h2 ("WATCH THE VIDEO", width="100%",
-                                   style="font-size: 130%; font-weight: 500; letter-spacing: .65px; text-align: left; padding: 12px 12px 11px 12px; border-width: 2px; border-style: solid; border-color: #3da1cc")
+                                   style="font-size: 130%; font-weight: 500; letter-spacing: .65px; text-align: left; padding: 12px 12px 11px 12px; border: 2px solid #878de3")
                         )
                  )
                  
@@ -60,7 +60,7 @@ div(id="InfoAboutBox",
                  ),
                  column(10,
                         h6 ("CoralP was adapated from Coral in the ", tags$a(href="http://phanstiel-lab.med.unc.edu/", "Phanstiel Lab"),
-                            " at UNC by Amit Min and Erika Deodudes."),
+                            " at UNC by Amit Min and Erika Deoudes."),
                         h6 ("Coral is written in R and relies on the following packages: shiny, shinydashboard, shinyBS, readr, rsvg, shinyWidgets, RColorBrewer."), 
                         h6 ("Circle and Force Layouts are written in javascript using the amazing ",
                             tags$a(href="https://d3js.org/", "D3 library."))
@@ -86,7 +86,7 @@ div(id="InfoAboutBox",
                             tags$a(href="https://www.biorxiv.org/content/early/2018/05/25/330274", "bioRxiv",target="_blank")),
                         h6 ("Coral makes use of phylogenetic information and Tree plots derived from ",
                             tags$a(href="https://stke.sciencemag.org/content/10/474/eaag1796/tab-figures-data","Chen et al, Science, 2017.",target="_blank")),
-                        tags$br(), tags$br(), tags$br()
+                        tags$br(), tags$br(), tags$br(), tags$br()
                         
                  )
         )
