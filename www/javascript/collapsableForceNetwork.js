@@ -18,8 +18,8 @@ binding.renderValue = function(el, data) {
 
       var force = d3.layout.force()
           .linkDistance(0.25)
-          .charge(-40)
-          .gravity(0.2)
+          .charge(-80)
+          .gravity(0.1)
           .size([width, height])
           .on("tick", tick);
 

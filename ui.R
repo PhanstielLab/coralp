@@ -1,6 +1,6 @@
 ## app.R ##
 
-ui <- dashboardPage(title="CORAL",
+ui <- dashboardPage(title="CORALp",
                     dashboardHeader(title = tags$a(span(img(src="logos/coralp-logo-white.png",height=60,align="left")),href="http://phanstiel-lab.med.unc.edu/coralp/"),titleWidth = 600,
                                     
                                     tags$li(class = "dropdown",

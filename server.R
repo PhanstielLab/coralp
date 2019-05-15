@@ -1,219 +1,218 @@
-
 # server business
 server <- function(input, output,session) {
- 
- # ----------------- MAKE DIVS & USER FILES FOR TREE, CIRCLE, AND FORCE ---------------- #
- 
- # set all of the temp files
- outputjson      = tempfile(pattern="kinome_tree",tmpdir="www/json",fileext = ".json") # session specific json file describing network
- outputjsonshort = paste("json/",strsplit(outputjson,split = "/")[[1]][3],sep="") # used to communicate to js
- subdffile       = tempfile(pattern="subdf",tmpdir="tempfiles",fileext = ".txt") # temp file used to make json file
- svgoutfile      = tempfile(pattern="kintreeout",tmpdir="tempfiles",fileext = ".svg") # session specific tree svg file
- 
- # these plots need to be created here (in server) rather that in UI so that they are unique to each session.  Otherwise there will
- # be cross talk between multiple people using the web server at once
- insertUI(selector = "#treediv",where = "afterEnd",ui = source("R/renderTree.R",local=TRUE)$value)
- insertUI(selector = "#circlediv",where = "afterEnd",ui = div(id="circlelayout", class="circleNetwork",jsonfilename=outputjsonshort))
- insertUI(selector = "#forcediv",where = "afterEnd",ui = div(id="forcelayout", class="collapsableForceNetwork",jsonfilename=outputjsonshort))
- 
- # ----------------- UPDATE MANUAL KINASE SELECTION ---------------- #
- 
- # branch color
- observe({
-  idtype = paste("id.",input$branchManualIDtype,sep="")
-  print(idtype)
-  if (idtype == "id.coralID"){idtype = "id.coral"}
-  idstodisplay = svginfo$dataframe[,which(names(svginfo$dataframe) == idtype)]
-  idstodisplay = unique(idstodisplay)
-  idstodisplay = idstodisplay[which(idstodisplay != "NA")]
-  updateSelectInput(session,inputId = "PhosphatasesManual",choices = idstodisplay)
- })
- 
- # node color
- observe({
-  idtype = paste("id.",input$NodeManualIDtype,sep="")
-  if (idtype == "id.coralID"){idtype = "id.coral"}
-  idstodisplay = svginfo$dataframe[,which(names(svginfo$dataframe) == idtype)] 
-  idstodisplay = unique(idstodisplay)
-  idstodisplay = idstodisplay[which(idstodisplay != "NA")]
-  updateSelectInput(session,inputId = "PhosphatasesManualNode",choices = idstodisplay)
- })
- 
- # ----------------- PALETTE REVERSALS ---------------- #
- 
- observeEvent(input$PhosphatasesManualBranchRevPalette,{
-   orig_col_select_bg = input$col_select_bg
-   orig_col_select = input$col_select
-   updateColourInput(session,"col_select_bg",value = orig_col_select)
-   updateColourInput(session,"col_select",value = orig_col_select_bg)
+  
+  # ----------------- MAKE DIVS & USER FILES FOR TREE, CIRCLE, AND FORCE ---------------- #
+  
+  # set all of the temp files
+  outputjson      = tempfile(pattern="kinome_tree",tmpdir="www/json",fileext = ".json") # session specific json file describing network
+  outputjsonshort = paste("json/",strsplit(outputjson,split = "/")[[1]][3],sep="") # used to communicate to js
+  subdffile       = tempfile(pattern="subdf",tmpdir="tempfiles",fileext = ".txt") # temp file used to make json file
+  svgoutfile      = tempfile(pattern="kintreeout",tmpdir="tempfiles",fileext = ".svg") # session specific tree svg file
+  
+  # these plots need to be created here (in server) rather that in UI so that they are unique to each session.  Otherwise there will
+  # be cross talk between multiple people using the web server at once
+  insertUI(selector = "#treediv",where = "afterEnd",ui = source("R/renderTree.R",local=TRUE)$value)
+  insertUI(selector = "#circlediv",where = "afterEnd",ui = div(id="circlelayout", class="circleNetwork",jsonfilename=outputjsonshort))
+  insertUI(selector = "#forcediv",where = "afterEnd",ui = div(id="forcelayout", class="collapsableForceNetwork",jsonfilename=outputjsonshort))
+  
+  # ----------------- UPDATE MANUAL KINASE SELECTION ---------------- #
+  
+  # branch color
+  observe({
+    idtype = paste("id.",input$branchManualIDtype,sep="")
+    print(idtype)
+    if (idtype == "id.coralID"){idtype = "id.coral"}
+    idstodisplay = svginfo$dataframe[,which(names(svginfo$dataframe) == idtype)]
+    idstodisplay = unique(idstodisplay)
+    idstodisplay = idstodisplay[which(idstodisplay != "NA")]
+    updateSelectInput(session,inputId = "PhosphatasesManual",choices = idstodisplay)
   })
- 
- observeEvent(input$PhosphatasesBranchValue2RevPalette,{
-  orig_branch2col_low = input$branch2col_low
-  orig_branch2col_hi = input$branch2col_hi
-  updateColourInput(session,"branch2col_low",value = orig_branch2col_hi)
-  updateColourInput(session,"branch2col_hi",value = orig_branch2col_low)
- })
- 
- observeEvent(input$PhosphatasesBranchValue3RevPalette,{
-  orig_branch3col_low = input$branch3col_low
-  orig_branch3col_hi = input$branch3col_hi
-  updateColourInput(session,"branch3col_low",value = orig_branch3col_hi)
-  updateColourInput(session,"branch3col_hi",value = orig_branch3col_low)
- })
- 
- observeEvent(input$PhosphatasesManualNodeRevPalette,{
-  orig_col_node_bg = input$col_node_bg
-  orig_col_sel_node = input$col_sel_node
-  updateColourInput(session,"col_node_bg",value = orig_col_sel_node)
-  updateColourInput(session,"col_sel_node",value = orig_col_node_bg)
- })
- 
- observeEvent(input$PhosphatasesNodeValue2RevPalette,{
-  orig_node2col_low = input$node2col_low
-  orig_node2col_hi = input$node2col_hi
-  updateColourInput(session,"node2col_low",value = orig_node2col_hi)
-  updateColourInput(session,"node2col_hi",value = orig_node2col_low)
- })
- 
- observeEvent(input$PhosphatasesNodeValue3RevPalette,{
-  orig_node3col_low = input$node3col_low
-  orig_node3col_hi = input$node3col_hi
-  updateColourInput(session,"node3col_low",value = orig_node3col_hi)
-  updateColourInput(session,"node3col_hi",value = orig_node3col_low)
- })
- 
- # ----------------- INFO PAGES ---------------- #
- 
- # Define a function to remove and replace info boxes
- replaceinfobox = function(infoboxcode)
- {
-  # remove any existing info boxes
-  removeUI(selector = "#InfoBranchColorBox")
-  removeUI(selector = "#InfoNodeColorBox")
-  removeUI(selector = "#InfoNodeSizeBox")
-  removeUI(selector = "#InfoAdvancedOptionsBox")
-  removeUI(selector = "#InfoAboutBox")
-  # load code to insert selected info box
-  insertUI(selector = "#InfoBox",where = "afterEnd",ui = source(infoboxcode,local=TRUE)$value)
- } 
-
- 
- # Make the about page the default page
- replaceinfobox("R/InfoAbout.R")
- 
- # Load info box according to button click
- observeEvent(input$InfoBranchColorButton,{replaceinfobox("R/InfoBranchColor.R")})
- observeEvent(input$InfoNodeColorButton,{replaceinfobox("R/InfoNodeColor.R")})
- observeEvent(input$InfoNodeSizeButton,{replaceinfobox("R/InfoNodeSize.R")})
- observeEvent(input$InfoAdvancedSettingsButton,{replaceinfobox("R/InfoAdvancedOptions.R")})
- observeEvent(input$InfoAboutButton,{replaceinfobox("R/InfoAbout.R")})
- 
- # Update selected tab
- observe({
-  if (input$dashboardchooser == "Info")
-   {
-   updateTabItems(session, inputId="sidebartabs", selected = "Info")
-   updateRadioGroupButtons(session,inputId="dashboardchooser2",selected="Info")
-   }
- })
- 
- observe({
-  if (input$dashboardchooser2 == "Plot")
+  
+  # node color
+  observe({
+    idtype = paste("id.",input$NodeManualIDtype,sep="")
+    if (idtype == "id.coralID"){idtype = "id.coral"}
+    idstodisplay = svginfo$dataframe[,which(names(svginfo$dataframe) == idtype)] 
+    idstodisplay = unique(idstodisplay)
+    idstodisplay = idstodisplay[which(idstodisplay != "NA")]
+    updateSelectInput(session,inputId = "PhosphatasesManualNode",choices = idstodisplay)
+  })
+  
+  # ----------------- PALETTE REVERSALS ---------------- #
+  
+  observeEvent(input$PhosphatasesManualBranchRevPalette,{
+    orig_col_select_bg = input$col_select_bg
+    orig_col_select = input$col_select
+    updateColourInput(session,"col_select_bg",value = orig_col_select)
+    updateColourInput(session,"col_select",value = orig_col_select_bg)
+  })
+  
+  observeEvent(input$PhosphatasesBranchValue2RevPalette,{
+    orig_branch2col_low = input$branch2col_low
+    orig_branch2col_hi = input$branch2col_hi
+    updateColourInput(session,"branch2col_low",value = orig_branch2col_hi)
+    updateColourInput(session,"branch2col_hi",value = orig_branch2col_low)
+  })
+  
+  observeEvent(input$PhosphatasesBranchValue3RevPalette,{
+    orig_branch3col_low = input$branch3col_low
+    orig_branch3col_hi = input$branch3col_hi
+    updateColourInput(session,"branch3col_low",value = orig_branch3col_hi)
+    updateColourInput(session,"branch3col_hi",value = orig_branch3col_low)
+  })
+  
+  observeEvent(input$PhosphatasesManualNodeRevPalette,{
+    orig_col_node_bg = input$col_node_bg
+    orig_col_sel_node = input$col_sel_node
+    updateColourInput(session,"col_node_bg",value = orig_col_sel_node)
+    updateColourInput(session,"col_sel_node",value = orig_col_node_bg)
+  })
+  
+  observeEvent(input$PhosphatasesNodeValue2RevPalette,{
+    orig_node2col_low = input$node2col_low
+    orig_node2col_hi = input$node2col_hi
+    updateColourInput(session,"node2col_low",value = orig_node2col_hi)
+    updateColourInput(session,"node2col_hi",value = orig_node2col_low)
+  })
+  
+  observeEvent(input$PhosphatasesNodeValue3RevPalette,{
+    orig_node3col_low = input$node3col_low
+    orig_node3col_hi = input$node3col_hi
+    updateColourInput(session,"node3col_low",value = orig_node3col_hi)
+    updateColourInput(session,"node3col_hi",value = orig_node3col_low)
+  })
+  
+  # ----------------- INFO PAGES ---------------- #
+  
+  # Define a function to remove and replace info boxes
+  replaceinfobox = function(infoboxcode)
   {
-   updateTabItems(session, inputId="sidebartabs", selected = "Visualize")
-   updateRadioGroupButtons(session,inputId="dashboardchooser",selected="Plot")
-   }
- })
- 
- # ----------------- LOAD EXAMPLE DATA ---------------- #
- 
- # Load example data for branches color by group
- observe({
-  if (input$loadexamplebranchgroup == FALSE)
-  {
-   phosphatasegroupinfobr = ""
-  }
-  if (input$loadexamplebranchgroup == TRUE)
-  {
-   phosphatasegroupinfobr = paste(apply(data.frame(svginfo$dataframe$id.coral,svginfo$dataframe$phosphatase.group),1,paste,collapse="\t"),collapse="\n")
-   updateTextInput(session, "branchGroupIDtype", value = "coralID")
-  }
-  updateTextInput(session, "branchGroupBox", value = phosphatasegroupinfobr)
- })
- 
- # Load example data for nodes color by group
- observe({
-  if (input$loadexamplennodegroup == FALSE)
-  {
-   phosphatasegroupinfono = ""
-  }
-  if (input$loadexamplennodegroup == TRUE)
-  {
-   phosphatasegroupinfono = paste(apply(data.frame(svginfo$dataframe$id.coral,svginfo$dataframe$phosphatase.group),1,paste,collapse="\t"),collapse="\n")
-   updateTextInput(session, "nodeGroupIDtype", value = "coralID")
-  }
-  updateTextInput(session, "nodeGroupBox", value = phosphatasegroupinfono)
- })
- 
- # Load example data for branches color Quantitative
- observe({
-  if (input$loadexamplebranchvalue == FALSE)
-  {
-   examplebranchvaluedata = ""
-  }
-  if (input$loadexamplebranchvalue == TRUE)
-  {
-   examplebranchvaluedata = rna_data
-   updateTextInput(session, "branchValueIDtype", value = "HGNC")
-  }
-  updateRadioButtons(session,"branchcolorpalettetype", selected="divergent")
-  updateTextInput(session, "branchValueBox", value = examplebranchvaluedata)
- })
- 
- # Load example data for nodes color Quantitative
- observe({
-  if (input$loadexamplennodevalue == FALSE)
-  {
-   examplenodevaluedata = ""
-  }
-  if (input$loadexamplennodevalue == TRUE)
-  {
-   examplenodevaluedata = rna_data
-   updateTextInput(session, "nodeValueIDtype", value = "HGNC")
-  }
-  updateRadioButtons(session,"nodecolorpalettetype",selected="divergent")
-  updateTextInput(session, "nodeValueBox", value = examplenodevaluedata)
- })
- 
- # Load example data for nodes size Quantitative
- observe({
-  if (input$loadexamplennodesizevalue == FALSE)
-  {
-   examplenodesizevaluedata = ""
-  }
-  if (input$loadexamplennodesizevalue == TRUE)
-  {
-   examplenodesizevaluedata = rna_abs_data
-   
-   # set the correct ID type
-   updateTextInput(session, "nodesizeValueIDtype", value = "HGNC")
-   
-   # update the manual inpout checkbox
-   updatePrettyCheckbox(session,"Manuallysetdatarange",value=TRUE)
-   
-   # Set the input range
-   updateNumericInput(session, "nodesizevaluein", value = 0)
-   updateNumericInput(session, "nodesizevaluemax",value = 100)
-   
-   # Set the size range
-   updateSliderInput(session,"nodesizeValueslider",value=c(4,16))
-  }
-  updateTextInput(session, "nodesizeValueBox", value = examplenodesizevaluedata)
- })
- 
- # ----------------- MAIN REACTIVE FUNCTION ---------------- #
- 
+    # remove any existing info boxes
+    removeUI(selector = "#InfoBranchColorBox")
+    removeUI(selector = "#InfoNodeColorBox")
+    removeUI(selector = "#InfoNodeSizeBox")
+    removeUI(selector = "#InfoAdvancedOptionsBox")
+    removeUI(selector = "#InfoAboutBox")
+    # load code to insert selected info box
+    insertUI(selector = "#InfoBox",where = "afterEnd",ui = source(infoboxcode,local=TRUE)$value)
+  } 
+  
+  
+  # Make the about page the default page
+  replaceinfobox("R/InfoAbout.R")
+  
+  # Load info box according to button click
+  observeEvent(input$InfoBranchColorButton,{replaceinfobox("R/InfoBranchColor.R")})
+  observeEvent(input$InfoNodeColorButton,{replaceinfobox("R/InfoNodeColor.R")})
+  observeEvent(input$InfoNodeSizeButton,{replaceinfobox("R/InfoNodeSize.R")})
+  observeEvent(input$InfoAdvancedSettingsButton,{replaceinfobox("R/InfoAdvancedOptions.R")})
+  observeEvent(input$InfoAboutButton,{replaceinfobox("R/InfoAbout.R")})
+  
+  # Update selected tab
+  observe({
+    if (input$dashboardchooser == "Info")
+    {
+      updateTabItems(session, inputId="sidebartabs", selected = "Info")
+      updateRadioGroupButtons(session,inputId="dashboardchooser2",selected="Info")
+    }
+  })
+  
+  observe({
+    if (input$dashboardchooser2 == "Plot")
+    {
+      updateTabItems(session, inputId="sidebartabs", selected = "Visualize")
+      updateRadioGroupButtons(session,inputId="dashboardchooser",selected="Plot")
+    }
+  })
+  
+  # ----------------- LOAD EXAMPLE DATA ---------------- #
+  
+  # Load example data for branches color by group
+  observe({
+    if (input$loadexamplebranchgroup == FALSE)
+    {
+      phosphatasegroupinfobr = ""
+    }
+    if (input$loadexamplebranchgroup == TRUE)
+    {
+      phosphatasegroupinfobr = paste(apply(data.frame(svginfo$dataframe$id.coral,svginfo$dataframe$phosphatase.group),1,paste,collapse="\t"),collapse="\n")
+      updateTextInput(session, "branchGroupIDtype", value = "coralID")
+    }
+    updateTextInput(session, "branchGroupBox", value = phosphatasegroupinfobr)
+  })
+  
+  # Load example data for nodes color by group
+  observe({
+    if (input$loadexamplennodegroup == FALSE)
+    {
+      phosphatasegroupinfono = ""
+    }
+    if (input$loadexamplennodegroup == TRUE)
+    {
+      phosphatasegroupinfono = paste(apply(data.frame(svginfo$dataframe$id.coral,svginfo$dataframe$phosphatase.group),1,paste,collapse="\t"),collapse="\n")
+      updateTextInput(session, "nodeGroupIDtype", value = "coralID")
+    }
+    updateTextInput(session, "nodeGroupBox", value = phosphatasegroupinfono)
+  })
+  
+  # Load example data for branches color Quantitative
+  observe({
+    if (input$loadexamplebranchvalue == FALSE)
+    {
+      examplebranchvaluedata = ""
+    }
+    if (input$loadexamplebranchvalue == TRUE)
+    {
+      examplebranchvaluedata = rna_data
+      updateTextInput(session, "branchValueIDtype", value = "HGNC")
+    }
+    updateRadioButtons(session,"branchcolorpalettetype", selected="divergent")
+    updateTextInput(session, "branchValueBox", value = examplebranchvaluedata)
+  })
+  
+  # Load example data for nodes color Quantitative
+  observe({
+    if (input$loadexamplennodevalue == FALSE)
+    {
+      examplenodevaluedata = ""
+    }
+    if (input$loadexamplennodevalue == TRUE)
+    {
+      examplenodevaluedata = rna_data
+      updateTextInput(session, "nodeValueIDtype", value = "HGNC")
+    }
+    updateRadioButtons(session,"nodecolorpalettetype",selected="divergent")
+    updateTextInput(session, "nodeValueBox", value = examplenodevaluedata)
+  })
+  
+  # Load example data for nodes size Quantitative
+  observe({
+    if (input$loadexamplennodesizevalue == FALSE)
+    {
+      examplenodesizevaluedata = ""
+    }
+    if (input$loadexamplennodesizevalue == TRUE)
+    {
+      examplenodesizevaluedata = rna_abs_data
+      
+      # set the correct ID type
+      updateTextInput(session, "nodesizeValueIDtype", value = "HGNC")
+      
+      # update the manual inpout checkbox
+      updatePrettyCheckbox(session,"Manuallysetdatarange",value=TRUE)
+      
+      # Set the input range
+      updateNumericInput(session, "nodesizevaluein", value = 0)
+      updateNumericInput(session, "nodesizevaluemax",value = 100)
+      
+      # Set the size range
+      updateSliderInput(session,"nodesizeValueslider",value=c(4,16))
+    }
+    updateTextInput(session, "nodesizeValueBox", value = examplenodesizevaluedata)
+  })
+  
+  # ----------------- MAIN REACTIVE FUNCTION ---------------- #
+  
   newdf <- reactive({ 
     
     # refresh when refresh button is clicked
@@ -224,13 +223,11 @@ server <- function(input, output,session) {
     
     # set font family
     tempdf$text.font = paste("'",input$fontfamilyselect,"'",sep="")
-
+    
     # establish legend
     legend = c()
     # Set initial yoffset
-    
-    # AMIT'S CHANGE yoffset = 79.125
-    yoffset = 25
+    yoffset = 79.125
     
     # get current values
     tempdf$text.size = input$fontsize
@@ -244,36 +241,36 @@ server <- function(input, output,session) {
     # Manually select branches to color
     if (input$branchcolortype == "Manual")
     {
-     # set colors based on selected ids
-     selphosphatases = ""
-     if (input$branchmanuallyinputmethod == "browse")
-     {
-      selphosphatases = input$PhosphatasesManual
-     }
-     if (input$branchmanuallyinputmethod == "paste")
-     {
-      selphosphatases = unlist(strsplit(split = "\n",x=input$PhosphatasesManualBranchText))
-     }
-     
-     selphosphatasescoral = ""
-     if (length(selphosphatases) > 0)
-     {
-      # convert selected to coral ids
-      phosphatasestoconvert = data.frame(kin1=selphosphatases,kin2=selphosphatases)
-      selphosphatasesconverted = convertID (tempdf,phosphatasestoconvert,inputtype=input$branchManualIDtype)
-      if (nrow(selphosphatasesconverted) > 0)
+      # set colors based on selected ids
+      selphosphatases = ""
+      if (input$branchmanuallyinputmethod == "browse")
       {
-       selphosphatasescoral = selphosphatasesconverted[,1]
+        selphosphatases = input$PhosphatasesManual
       }
-     }
-     
-     # recolor based on selection
-     tempdf$branch.col =  color.by.selected(df = tempdf, sel = selphosphatasescoral, bg.col  = input$col_select_bg,  sel.col = input$col_select)
-     
-     # reorder based on selected ids
-     #tempdf = tempdf[order(tempdf$id.coral %in% selphosphatasescoral, decreasing = FALSE),]
-     tempdf$branchorder = order(tempdf$id.coral %in% selphosphatasescoral, decreasing = FALSE)
-     
+      if (input$branchmanuallyinputmethod == "paste")
+      {
+        selphosphatases = unlist(strsplit(split = "\n",x=input$PhosphatasesManualBranchText))
+      }
+      
+      selphosphatasescoral = ""
+      if (length(selphosphatases) > 0)
+      {
+        # convert selected to coral ids
+        phosphatasestoconvert = data.frame(kin1=selphosphatases,kin2=selphosphatases)
+        selphosphatasesconverted = convertID (tempdf,phosphatasestoconvert,inputtype=input$branchManualIDtype)
+        if (nrow(selphosphatasesconverted) > 0)
+        {
+          selphosphatasescoral = selphosphatasesconverted[,1]
+        }
+      }
+      
+      # recolor based on selection
+      tempdf$branch.col =  color.by.selected(df = tempdf, sel = selphosphatasescoral, bg.col  = input$col_select_bg,  sel.col = input$col_select)
+      
+      # reorder based on selected ids
+      #tempdf = tempdf[order(tempdf$id.coral %in% selphosphatasescoral, decreasing = FALSE),]
+      tempdf$branchorder = order(tempdf$id.coral %in% selphosphatasescoral, decreasing = FALSE)
+      
       # build legend for Branch Color (manual selection)
       lines_and_offset = build.group.legend(yoffset=yoffset,groupslabels=c(input$branch_select_label,input$branch_nonselect_label),groupcolors=c(input$col_select,input$col_select_bg),elementtype = "Branch",fontfamily = input$fontfamilyselect)
       lines = lines_and_offset[[1]]
@@ -284,34 +281,34 @@ server <- function(input, output,session) {
     # color branches by group
     if (input$branchcolortype == "Categorical")
     {
-     # define color palette
-     if (input$branchgroupcolorpalettetype == "prebuilt")
-     {
-      branchgroupcolpalette = unlist(qualpalettes[input$branchgroupcolorpalette_qaul])
-     }
-     if (input$branchgroupcolorpalettetype == "manual")
-     {
-      branchgroupcolpalette = c(input$branchgroupcol1,input$branchgroupcol2,input$branchgroupcol3,input$branchgroupcol4,
-                                input$branchgroupcol5,input$branchgroupcol6,input$branchgroupcol7,input$branchgroupcol8,
-                                input$branchgroupcol9,input$branchgroupcol10,input$branchgroupcol11,input$branchgroupcol12)
-     }
-     
-     # read in text area input
+      # define color palette
+      if (input$branchgroupcolorpalettetype == "prebuilt")
+      {
+        branchgroupcolpalette = unlist(qualpalettes[input$branchgroupcolorpalette_qaul])
+      }
+      if (input$branchgroupcolorpalettetype == "manual")
+      {
+        branchgroupcolpalette = c(input$branchgroupcol1,input$branchgroupcol2,input$branchgroupcol3,input$branchgroupcol4,
+                                  input$branchgroupcol5,input$branchgroupcol6,input$branchgroupcol7,input$branchgroupcol8,
+                                  input$branchgroupcol9,input$branchgroupcol10,input$branchgroupcol11,input$branchgroupcol12)
+      }
+      
+      # read in text area input
       recolordf = read.text.input(input$branchGroupBox)
       
       # convert to coral id
       recolordf = convertID (tempdf,recolordf,inputtype=input$branchGroupIDtype)
-
+      
       if (nrow(recolordf)>0)
       {
         # check for user supplied groups
         categories=NULL 
         if (input$manualgroupcols_branch == TRUE)
         {
-         categories = unlist(strsplit(input$ManualBranchCategories,split="\n"))
-         if (length(categories) == 0){categories=NULL }
+          categories = unlist(strsplit(input$ManualBranchCategories,split="\n"))
+          if (length(categories) == 0){categories=NULL }
         }
-       
+        
         # set colors based on group
         newcolors_and_colormapping = color.by.group(df = tempdf, recolordf = recolordf, bg.col=input$defaultbranchcolor_categorical, colors  = branchgroupcolpalette,categories=categories)
         tempdf$branch.col = newcolors_and_colormapping[[1]]
@@ -320,7 +317,7 @@ server <- function(input, output,session) {
         
         # reorder based on branch color 
         # tempdf = tempdf[order(tempdf$branch.group),]
-       
+        
         # reorder based in whether phosphatase was in text box
         # tempdf = tempdf[order(tempdf$id.coral %in% recolordf[,1], decreasing = FALSE),]
         tempdf$branchorder = order(tempdf$id.coral %in% recolordf[,1], decreasing = FALSE)
@@ -347,45 +344,45 @@ server <- function(input, output,session) {
         # establish palette
         if (input$branchcolorpalettetype == "sequential") 
         {
-         palettecolors = unlist(seqpalettes[input$branchcolorpalette_seq])
-         if(input$reversebranchpalettesequential == TRUE)
-         {
-          palettecolors = rev(palettecolors)
-         }
-         branchcolpalette = colorRampPalette(palettecolors)(11)
+          palettecolors = unlist(seqpalettes[input$branchcolorpalette_seq])
+          if(input$reversebranchpalettesequential == TRUE)
+          {
+            palettecolors = rev(palettecolors)
+          }
+          branchcolpalette = colorRampPalette(palettecolors)(11)
           bg.col = unlist(seqpalettes[input$branchcolorpalette_seq])[1]
-         }
+        }
         if (input$branchcolorpalettetype == "divergent") 
-         {
-
-         palettecolors = unlist(divpalettes[input$branchcolorpalette_div])
-         if(input$reversebranchpalettedivergent == TRUE)
-         {
-          palettecolors = rev(palettecolors)
-         }
-         branchcolpalette = colorRampPalette(palettecolors)(11)
-         
-         bg.col = unlist(divpalettes[input$branchcolorpalette_div])[2]
-         }
+        {
+          
+          palettecolors = unlist(divpalettes[input$branchcolorpalette_div])
+          if(input$reversebranchpalettedivergent == TRUE)
+          {
+            palettecolors = rev(palettecolors)
+          }
+          branchcolpalette = colorRampPalette(palettecolors)(11)
+          
+          bg.col = unlist(divpalettes[input$branchcolorpalette_div])[2]
+        }
         if (input$branchcolorpalettetype == "manual 2-color")
-         {
-         branchcolpalette = colorRampPalette(c(input$branch2col_low,input$branch2col_hi))(11)
-         bg.col = input$branch2col_low
-         }
+        {
+          branchcolpalette = colorRampPalette(c(input$branch2col_low,input$branch2col_hi))(11)
+          bg.col = input$branch2col_low
+        }
         if (input$branchcolorpalettetype == "manual 3-color") 
         {
-         branchcolpalette = colorRampPalette(c(input$branch3col_low,input$branch3col_med,input$branch3col_hi))(11)
-         bg.col = input$branch3col_med
-         }
-       
-       # recolor missing phosphatases accordingly
-       if (input$BranchValueMissingPhosphatase == "manually")
-       {
-        print ("asdfdas")
-        bg.col = input$BranchValueMissingPhosphataseColor
-        print (bg.col)
-       }
-       
+          branchcolpalette = colorRampPalette(c(input$branch3col_low,input$branch3col_med,input$branch3col_hi))(11)
+          bg.col = input$branch3col_med
+        }
+        
+        # recolor missing phosphatases accordingly
+        if (input$BranchValueMissingPhosphatase == "manually")
+        {
+          print ("asdfdas")
+          bg.col = input$BranchValueMissingPhosphataseColor
+          print (bg.col)
+        }
+        
         # set colors based on group
         newcolors_and_colormapping = color.by.value(df = tempdf, recolordf = recolordf, colors  = branchcolpalette, heatrange = c(input$minheat,input$maxheat),bg.col = bg.col)
         tempdf$branch.col = newcolors_and_colormapping[[1]]
@@ -394,11 +391,8 @@ server <- function(input, output,session) {
         # reorder based on branch value
         #tempdf = tempdf[order(abs(tempdf$branch.val), decreasing = FALSE,na.last = FALSE),]
         tempdf$branchorder = order(abs(tempdf$branch.val), decreasing = FALSE,na.last = FALSE)
-
-        # add legend info
-        # AMIT'S CHANGE
-        yoffset = yoffset + 70
         
+        # add legend info
         lines_and_offset = build.value.legend(yoffset=yoffset,minval=input$minheat,maxval=input$maxheat, palette=branchcolpalette,elementtype = "Branch",fontfamily = input$fontfamilyselect,subtitle = input$quantvaluenamebranchcolor)
         lines = lines_and_offset[[1]]
         yoffset = lines_and_offset[[2]] + 14
@@ -428,36 +422,36 @@ server <- function(input, output,session) {
     # Manually select nodes to color
     if (input$nodecolortype == "Manual")
     {
-     # set colors based on selected ids
-     selphosphatases = ""
-     if (input$nodemanuallyinputmethod == "browse")
-     {
-      selphosphatases = input$PhosphatasesManualNode
-     }
-     if (input$nodemanuallyinputmethod == "paste")
-     {
-      selphosphatases = unlist(strsplit(split = "\n",x=input$PhosphatasesManualNodeText))
-     }
-     
-     selphosphatasescoral = ""
-     tempdf$node.selected = -1
-     if (length(selphosphatases) > 0)
-     {
-      # convert selected to coral ids
-      phosphatasestoconvert = data.frame(kin1=selphosphatases,kin2=selphosphatases)
-      selphosphatasesconverted = convertID (tempdf,phosphatasestoconvert,inputtype=input$NodeManualIDtype)
-      if (nrow(selphosphatasesconverted) > 0)
+      # set colors based on selected ids
+      selphosphatases = ""
+      if (input$nodemanuallyinputmethod == "browse")
       {
-       selphosphatasescoral = selphosphatasesconverted[,1]
+        selphosphatases = input$PhosphatasesManualNode
+      }
+      if (input$nodemanuallyinputmethod == "paste")
+      {
+        selphosphatases = unlist(strsplit(split = "\n",x=input$PhosphatasesManualNodeText))
       }
       
-      # note them as selected so we can add them to the top of the plot later
-      tempdf$node.selected[which(tempdf$id.coral %in% selphosphatasescoral)] = 1
-     }
-     
-     # recolor based on selection
-     tempdf$node.col =  color.by.selected(df = tempdf, sel = selphosphatasescoral, bg.col  = input$col_node_bg,  sel.col = input$col_sel_node)
-
+      selphosphatasescoral = ""
+      tempdf$node.selected = -1
+      if (length(selphosphatases) > 0)
+      {
+        # convert selected to coral ids
+        phosphatasestoconvert = data.frame(kin1=selphosphatases,kin2=selphosphatases)
+        selphosphatasesconverted = convertID (tempdf,phosphatasestoconvert,inputtype=input$NodeManualIDtype)
+        if (nrow(selphosphatasesconverted) > 0)
+        {
+          selphosphatasescoral = selphosphatasesconverted[,1]
+        }
+        
+        # note them as selected so we can add them to the top of the plot later
+        tempdf$node.selected[which(tempdf$id.coral %in% selphosphatasescoral)] = 1
+      }
+      
+      # recolor based on selection
+      tempdf$node.col =  color.by.selected(df = tempdf, sel = selphosphatasescoral, bg.col  = input$col_node_bg,  sel.col = input$col_sel_node)
+      
       # # build legend for Node Color (Manual Selection)
       lines_and_offset = build.group.legend(yoffset=yoffset,groupslabels=c(input$node_select_label,input$node_nonselect_label),groupcolors=c(input$col_sel_node,input$col_node_bg),elementtype = "Node",fontfamily = input$fontfamilyselect)
       lines = lines_and_offset[[1]]
@@ -468,19 +462,19 @@ server <- function(input, output,session) {
     # color nodes by group
     if (input$nodecolortype == "Categorical")
     {
-     # define color palette
-     if (input$nodegroupcolorpalettetype == "prebuilt")
-     {
-      nodegroupcolpalette = unlist(qualpalettes[input$nodegroupcolorpalette_qaul])
-     }
-     if (input$nodegroupcolorpalettetype == "manual")
-     {
-      nodegroupcolpalette = c(input$nodegroupcol1,input$nodegroupcol2,input$nodegroupcol3,input$nodegroupcol4,
+      # define color palette
+      if (input$nodegroupcolorpalettetype == "prebuilt")
+      {
+        nodegroupcolpalette = unlist(qualpalettes[input$nodegroupcolorpalette_qaul])
+      }
+      if (input$nodegroupcolorpalettetype == "manual")
+      {
+        nodegroupcolpalette = c(input$nodegroupcol1,input$nodegroupcol2,input$nodegroupcol3,input$nodegroupcol4,
                                 input$nodegroupcol5,input$nodegroupcol6,input$nodegroupcol7,input$nodegroupcol8,
                                 input$nodegroupcol9,input$nodegroupcol10,input$nodegroupcol11,input$nodegroupcol12)
-     }
-     
-     # read in text area input
+      }
+      
+      # read in text area input
       recolordf = read.text.input(input$nodeGroupBox)
       
       # convert to coral id
@@ -492,10 +486,10 @@ server <- function(input, output,session) {
         categories=NULL 
         if (input$manualgroupcols_node == TRUE)
         {
-         categories = unlist(strsplit(input$ManualNodeCategories,split="\n"))
-         if (length(categories) == 0){categories=NULL }
+          categories = unlist(strsplit(input$ManualNodeCategories,split="\n"))
+          if (length(categories) == 0){categories=NULL }
         } 
-       
+        
         # set colors based on group
         newcolors_and_colormapping = color.by.group(df = tempdf, recolordf = recolordf, bg.col = input$defaultnodecolor_categorical, colors  = nodegroupcolpalette,categories=categories)
         tempdf$node.col = newcolors_and_colormapping[[1]]
@@ -503,10 +497,9 @@ server <- function(input, output,session) {
         node.group.colormapping = newcolors_and_colormapping[[3]]
         
         # build legend for Branch Color (by group)
-        
         lines_and_offset = build.group.legend(yoffset=yoffset,groupslabels=names(node.group.colormapping),groupcolors=node.group.colormapping,elementtype = "Node",fontfamily = input$fontfamilyselect)
         lines = lines_and_offset[[1]]
-        yoffset = lines_and_offset[[2]] + 400
+        yoffset = lines_and_offset[[2]] + 14
         legend = c(legend,lines)
       }
     }
@@ -523,43 +516,43 @@ server <- function(input, output,session) {
       if (nrow(recolordf)>0)
       {
         # establish palette
-       if (input$nodecolorpalettetype == "sequential") 
-       {
-        palettecolors = unlist(seqpalettes[input$nodecolorpalette_seq])
-        if(input$reversenodepalettesequential == TRUE)
+        if (input$nodecolorpalettetype == "sequential") 
         {
-         palettecolors = rev(palettecolors)
+          palettecolors = unlist(seqpalettes[input$nodecolorpalette_seq])
+          if(input$reversenodepalettesequential == TRUE)
+          {
+            palettecolors = rev(palettecolors)
+          }
+          nodecolpalette = colorRampPalette(palettecolors)(11)
+          
+          bg.col = unlist(seqpalettes[input$nodecolorpalette_seq])[1]
         }
-        nodecolpalette = colorRampPalette(palettecolors)(11)
-
-        bg.col = unlist(seqpalettes[input$nodecolorpalette_seq])[1]
-        }
-       if (input$nodecolorpalettetype == "divergent") 
-       {
-        palettecolors = unlist(divpalettes[input$nodecolorpalette_div])
-        if(input$reversenodepalettedivergent == TRUE)
+        if (input$nodecolorpalettetype == "divergent") 
         {
-         palettecolors = rev(palettecolors)
+          palettecolors = unlist(divpalettes[input$nodecolorpalette_div])
+          if(input$reversenodepalettedivergent == TRUE)
+          {
+            palettecolors = rev(palettecolors)
+          }
+          nodecolpalette = colorRampPalette(palettecolors)(11)
+          bg.col = unlist(divpalettes[input$nodecolorpalette_div])[2]
         }
-        nodecolpalette = colorRampPalette(palettecolors)(11)
-        bg.col = unlist(divpalettes[input$nodecolorpalette_div])[2]
-        }
-       if (input$nodecolorpalettetype == "manual 2-color") 
-       {
-        nodecolpalette = colorRampPalette(c(input$node2col_low,input$node2col_hi))(11)
-        bg.col = input$node2col_low
-        }
-       if (input$nodecolorpalettetype == "manual 3-color") 
+        if (input$nodecolorpalettetype == "manual 2-color") 
         {
-        nodecolpalette = colorRampPalette(c(input$node3col_low,input$node3col_med,input$node3col_hi))(11)
-        bg.col = input$node3col_med
-       }
-       
-       # recolor missing phosphatases accordingly
-       if (input$NodeValueMissingPhosphatase == "manually")
-       {
-        bg.col = input$NodeValueMissingPhosphataseColor
-       }
+          nodecolpalette = colorRampPalette(c(input$node2col_low,input$node2col_hi))(11)
+          bg.col = input$node2col_low
+        }
+        if (input$nodecolorpalettetype == "manual 3-color") 
+        {
+          nodecolpalette = colorRampPalette(c(input$node3col_low,input$node3col_med,input$node3col_hi))(11)
+          bg.col = input$node3col_med
+        }
+        
+        # recolor missing phosphatases accordingly
+        if (input$NodeValueMissingPhosphatase == "manually")
+        {
+          bg.col = input$NodeValueMissingPhosphataseColor
+        }
         
         # set colors based on value
         newcolors_and_colormapping = color.by.value(df = tempdf, recolordf = recolordf, colors  = nodecolpalette, heatrange = c(input$nodeminheat,input$nodemaxheat),bg.col = bg.col)
@@ -571,11 +564,6 @@ server <- function(input, output,session) {
         tempdf$nodeorder = order(abs(tempdf$node.val), decreasing = FALSE,na.last = FALSE)
         
         # add legend info
-        # AMIT'S CHANGE
-        if (yoffset < 70){
-          yoffset = yoffset + 70
-        }
-        
         lines_and_offset = build.value.legend(yoffset=yoffset,minval=input$nodeminheat,maxval=input$nodemaxheat, palette=nodecolpalette,elementtype = "Node",fontfamily = input$fontfamilyselect,subtitle = input$quantvaluenamenodecolor)
         lines = lines_and_offset[[1]]
         yoffset = lines_and_offset[[2]] + 14
@@ -604,17 +592,17 @@ server <- function(input, output,session) {
       {
         radii_and_mapping = resizes.by.value(df = tempdf, resizedf = resizedf, sizerange = input$nodesizeValueslider,
                                              controlledrange = input$Manuallysetdatarange, minvalue=input$nodesizevaluemin, maxvalue = input$nodesizevaluemax,showall=input$nodesizefornotprovidedquantitative)
-       
+        
         # Get correct limits for legend
         if (input$Manuallysetdatarange == FALSE)
         {
-         minvalforlegend = min(as.numeric(resizedf[,2]))
-         maxvalforlegend = max(as.numeric(resizedf[,2]))
+          minvalforlegend = min(as.numeric(resizedf[,2]))
+          maxvalforlegend = max(as.numeric(resizedf[,2]))
         }
         if (input$Manuallysetdatarange == TRUE)
         {
-         minvalforlegend = input$nodesizevaluemin
-         maxvalforlegend = input$nodesizevaluemax
+          minvalforlegend = input$nodesizevaluemin
+          maxvalforlegend = input$nodesizevaluemax
         }
         
         tempdf$node.radius     = radii_and_mapping[[1]]
@@ -643,30 +631,30 @@ server <- function(input, output,session) {
       tempdf$text.col = input$fontcolorchoose
     }
     
-    # CHANGE Color and Size of Font for Selected phosphatases
+    # Change Color and Size of Font for Selected phosphatases
     if (input$fontcolorselect == "Manual")
     {
-     selphosphatases = unlist(strsplit(split = "\n",x=input$PhosphatasesManualLabelsText))
-     
-     selphosphatasescoral = ""
-     if (length(selphosphatases) > 0)
-     {
-      # convert selected to coral ids
-      phosphatasestoconvert = data.frame(kin1=selphosphatases,kin2=selphosphatases)
-      selphosphatasesconverted = convertID (tempdf,phosphatasestoconvert,inputtype=input$labelsManualIDtype)
-      if (nrow(selphosphatasesconverted) > 0)
+      selphosphatases = unlist(strsplit(split = "\n",x=input$PhosphatasesManualLabelsText))
+      
+      selphosphatasescoral = ""
+      if (length(selphosphatases) > 0)
       {
-       selphosphatasescoral = selphosphatasesconverted[,1]
+        # convert selected to coral ids
+        phosphatasestoconvert = data.frame(kin1=selphosphatases,kin2=selphosphatases)
+        selphosphatasesconverted = convertID (tempdf,phosphatasestoconvert,inputtype=input$labelsManualIDtype)
+        if (nrow(selphosphatasesconverted) > 0)
+        {
+          selphosphatasescoral = selphosphatasesconverted[,1]
+        }
       }
-     }
-     
-     # set background color and font size
-     tempdf$text.col = input$fontcolorbackground
-     tempdf$text.size = input$fontsizebackground
-     
-     # set selected font color and size
-     tempdf$text.col[which(tempdf$id.coral %in% selphosphatasescoral)]  = input$fontcolorselection
-     tempdf$text.size[which(tempdf$id.coral %in% selphosphatasescoral)] = input$fontsizeselection
+      
+      # set background color and font size
+      tempdf$text.col = input$fontcolorbackground
+      tempdf$text.size = input$fontsizebackground
+      
+      # set selected font color and size
+      tempdf$text.col[which(tempdf$id.coral %in% selphosphatasescoral)]  = input$fontcolorselection
+      tempdf$text.size[which(tempdf$id.coral %in% selphosphatasescoral)] = input$fontsizeselection
     }
     
     
@@ -674,32 +662,32 @@ server <- function(input, output,session) {
     # Node stroke color
     if (input$nodestrokecolselect == "Single Color")
     {
-       tempdf$node.strokecol = input$nodestrokecol
+      tempdf$node.strokecol = input$nodestrokecol
     }
     if (input$nodestrokecolselect == "Same as Node")
     {
-     tempdf$node.strokecol = tempdf$node.col
+      tempdf$node.strokecol = tempdf$node.col
     }
     if (input$nodestrokecolselect == "Selected")
     {
-     tempdf$node.strokecol =  input$NodeStrokeSelect_BG
-     
-     # read in text area input
-     phosphatases = unlist(strsplit(x=input$NodeStrokeSelect,split="\\n"))
-     
-     if (length(phosphatases) > 0)
-     {
-      df = data.frame(phosphatases=phosphatases,again=phosphatases)
+      tempdf$node.strokecol =  input$NodeStrokeSelect_BG
       
-      # convert IDs
-      selectedphosphatasesforstroke = convertID (tempdf,df,inputtype=input$NodeStrokeSelectIDtype)
+      # read in text area input
+      phosphatases = unlist(strsplit(x=input$NodeStrokeSelect,split="\\n"))
       
-      if (nrow(selectedphosphatasesforstroke) > 0)
+      if (length(phosphatases) > 0)
       {
-       # set colors based on selected ids 
-       tempdf$node.strokecol =  color.by.selected(df = tempdf, sel = selectedphosphatasesforstroke[,1], bg.col  = input$NodeStrokeSelect_BG,  sel.col = input$NodeStrokeSelect_FG)
+        df = data.frame(phosphatases=phosphatases,again=phosphatases)
+        
+        # convert IDs
+        selectedphosphatasesforstroke = convertID (tempdf,df,inputtype=input$NodeStrokeSelectIDtype)
+        
+        if (nrow(selectedphosphatasesforstroke) > 0)
+        {
+          # set colors based on selected ids 
+          tempdf$node.strokecol =  color.by.selected(df = tempdf, sel = selectedphosphatasesforstroke[,1], bg.col  = input$NodeStrokeSelect_BG,  sel.col = input$NodeStrokeSelect_FG)
+        }
       }
-     }
     }
     
     return(list(tempdf,legend))
@@ -714,12 +702,12 @@ server <- function(input, output,session) {
     dfandlegend = newdf()
     svginfo$dataframe = dfandlegend[[1]]
     svginfo$legend = dfandlegend[[2]]
-
+    
     # set title
     svginfo$title = input$titleinput
     
     if (! dir.exists(dirname(svgoutfile))) {
-     dir.create(dirname(svgoutfile),showWarnings = F);  
+      dir.create(dirname(svgoutfile),showWarnings = F);  
     }
     
     # Write SVG file
@@ -731,46 +719,46 @@ server <- function(input, output,session) {
   
   #output to the graph div
   output$circlelayout <- reactive({
-   # recolor the official matrix
-   dfandlegend = newdf()
-   svginfo$dataframe = dfandlegend[[1]]
-   svginfo$legend = dfandlegend[[2]]
-   
-   # replace none color for D3 plots
-   allnodescoloreddf =  svginfo$dataframe
-   # allnodescoloreddf$node.col[which(allnodescoloreddf$node.col == "none")] = BG_col1
-   
-   # color nodes by single color
-   if (input$nodecolortype == "None")
-   {
-    allnodescoloreddf$node.col = input$col_node_single
-   }
-   
-   # modify color subnodes based on coloring options
-   if (input$nodestrokecolselect == "Single Color")
-   {
-    BGstrolecol = input$nodestrokecol
-   }
-   if (input$nodestrokecolselect == "Selected")
-   {
-    BGstrolecol = input$NodeStrokeSelect_BG
-   }
-   if (input$nodestrokecolselect == "Same as Node")
-   {
-    allnodescoloreddf$node.strokecol = allnodescoloreddf$node.col
-    BGstrolecol = "#ffffff"
-   }
-   
-   # Write kinome_tree.json (based on current dataframe)
-   if (! dir.exists('www/json')) {
-     dir.create('www/json')
-   }
-   makejson(allnodescoloreddf,tmp=subdffile,output=outputjson,BGcol=BG_col1,BGstrolecol=BGstrolecol,colsubnodes=input$colorsubnodes,
-            labelselect=input$phosphataselabelselect,defaultnoderadius=input$size_node_single,legend=svginfo$legend,
-            xshift=80,yshift=60)
-   
-   # Make this reactive to any change in input paramters
-   x <- reactiveValuesToList(input)
+    # recolor the official matrix
+    dfandlegend = newdf()
+    svginfo$dataframe = dfandlegend[[1]]
+    svginfo$legend = dfandlegend[[2]]
+    
+    # replace none color for D3 plots
+    allnodescoloreddf =  svginfo$dataframe
+    # allnodescoloreddf$node.col[which(allnodescoloreddf$node.col == "none")] = BG_col1
+    
+    # color nodes by single color
+    if (input$nodecolortype == "None")
+    {
+      allnodescoloreddf$node.col = input$col_node_single
+    }
+    
+    # modify color subnodes based on coloring options
+    if (input$nodestrokecolselect == "Single Color")
+    {
+      BGstrolecol = input$nodestrokecol
+    }
+    if (input$nodestrokecolselect == "Selected")
+    {
+      BGstrolecol = input$NodeStrokeSelect_BG
+    }
+    if (input$nodestrokecolselect == "Same as Node")
+    {
+      allnodescoloreddf$node.strokecol = allnodescoloreddf$node.col
+      BGstrolecol = "#ffffff"
+    }
+    
+    # Write kinome_tree.json (based on current dataframe)
+    if (! dir.exists('www/json')) {
+      dir.create('www/json')
+    }
+    makejson(allnodescoloreddf,tmp=subdffile,output=outputjson,BGcol=BG_col1,BGstrolecol=BGstrolecol,colsubnodes=input$colorsubnodes,
+             labelselect=input$phosphataselabelselect,defaultnoderadius=input$size_node_single,legend=svginfo$legend,
+             xshift=80,yshift=60)
+    
+    # Make this reactive to any change in input paramters
+    x <- reactiveValuesToList(input)
   })
   
   #output to the graph div
@@ -788,22 +776,22 @@ server <- function(input, output,session) {
     # color nodes by single color
     if (input$nodecolortype == "None")
     {
-     allnodescoloreddf$node.col = input$col_node_single
+      allnodescoloreddf$node.col = input$col_node_single
     }
     
     # modify color subnodes based on coloring options
     if (input$nodestrokecolselect == "Single Color")
     {
-     BGstrolecol = input$nodestrokecol
+      BGstrolecol = input$nodestrokecol
     }
     if (input$nodestrokecolselect == "Selected")
     {
-     BGstrolecol = input$NodeStrokeSelect_BG
+      BGstrolecol = input$NodeStrokeSelect_BG
     }
     if (input$nodestrokecolselect == "Same as Node")
     {
-     allnodescoloreddf$node.strokecol = allnodescoloreddf$node.col
-     BGstrolecol = "#ffffff"
+      allnodescoloreddf$node.strokecol = allnodescoloreddf$node.col
+      BGstrolecol = "#ffffff"
     }
     
     # Write kinome_tree.json (based on current dataframe)
@@ -860,19 +848,19 @@ server <- function(input, output,session) {
   })
   
   # ----------------- DOWNLOAD ---------------- #
- 
+  
   output$downloadtree <- downloadHandler(
-   
-   filename <- function(file) { paste("CORAL",".","tree",".","svg",sep="")},
-   content <- function(file) {
-    file.copy(svgoutfile, file)
-   }
-
-   # content = function(file) {
-   # file.copy(svgoutfile, file)
-   # content <- function(file) {
-   #  rsvg_svg(svgoutfile, file)
-   #}
+    
+    filename <- function(file) { paste("CORAL",".","tree",".","svg",sep="")},
+    content <- function(file) {
+      file.copy(svgoutfile, file)
+    }
+    
+    # content = function(file) {
+    # file.copy(svgoutfile, file)
+    # content <- function(file) {
+    #  rsvg_svg(svgoutfile, file)
+    #}
     
     # content <- function(file) {
     #   if (input$downloadtype == 'pdf') {
@@ -888,9 +876,9 @@ server <- function(input, output,session) {
   # ----------------- DELETE TEMP FILES WHEN SESSION ENDS ---------------- #
   
   session$onSessionEnded(function() {
-   if (file.exists(outputjson)){file.remove(outputjson)}
-   if (file.exists(subdffile)){file.remove(subdffile)}
-   if (file.exists(svgoutfile)){file.remove(svgoutfile)}
+    if (file.exists(outputjson)){file.remove(outputjson)}
+    if (file.exists(subdffile)){file.remove(subdffile)}
+    if (file.exists(svgoutfile)){file.remove(svgoutfile)}
   })
   
   # ----------------- ADD FORCE NETWORK DISCLAIMER ---------------- #
@@ -900,10 +888,12 @@ server <- function(input, output,session) {
   insertUI(selector = "#treedisclaimer",where = "afterEnd",
            ui = box(width=12,
                     
-                    "The kinome tree plots generated by CORAL make use of phylogenetic information and Tree plots derived from",
-                    tags$a("Chen et al., Science, 2017",href="http://stke.sciencemag.org/content/10/474/eaag1796/tab-figures-data", target="_blank"),
+                    "Coral makes use of phylogenetic information and Tree plots derived from ",
+                    tags$a(href="https://stke.sciencemag.org/content/10/474/eaag1796/tab-figures-data","Chen et al, Science, 2017.",target="_blank"),
+                    " and are based on a figure generated by ",
+                    tags$a("Cell Signaling Technology",href="https://www.cellsignal.com/contents/science/protein-phosphatases-introduction/phosphatases", target="_blank"),
                     "."
-
+                    
            )) # end tree disclaimer
   
   insertUI(selector = "#circledisclaimer",where = "afterEnd",
@@ -916,14 +906,14 @@ server <- function(input, output,session) {
                     "modified from ",
                     tags$a("code",href="https://bl.ocks.org/mbostock/4339607",target="_blank"),
                     "written by Mike Bostock."
-                   
+                    
            )) # end circle disclaimer
   
   
   insertUI(selector = "#forcedisclaimer",where = "afterEnd",
            ui = box(width=12,
                     
-                     "The force network plots generated by CORAL make use the ",
+                    "The force network plots generated by CORAL make use the ",
                     
                     tags$a("D3.js",href="https://d3js.org", target="_blank"),
                     "javascript library. The code to generate the visualization above was",
@@ -935,6 +925,6 @@ server <- function(input, output,session) {
                     tags$br(),
                     
                     actionButton(inputId = "refreshForcePlot",label = "Refresh Plot")
-                    )) # end force disclaimer
-
+           )) # end force disclaimer
+  
 }
