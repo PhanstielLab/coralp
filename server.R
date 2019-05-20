@@ -227,7 +227,7 @@ server <- function(input, output,session) {
     # establish legend
     legend = c()
     # Set initial yoffset
-    yoffset = 79.125
+    yoffset = 140
     
     # get current values
     tempdf$text.size = input$fontsize
