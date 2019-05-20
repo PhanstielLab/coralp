@@ -3,7 +3,7 @@
 # Define a function that makes boxes and labels for group type legends
 build.group.legend.elements <- function(x=99.208,y,color,width=6.584,height=6.584,label="group",fontsize=5,elementtype="Branch",fontfamily="'AvenirNext-Bold'")
 {
-  phosAdjust = -80
+  phosAdjust = 0
   x = phosAdjust
   # build the square
   square = paste("<rect x=\"", x,"\"",
@@ -48,9 +48,9 @@ build.group.legend.elements <- function(x=99.208,y,color,width=6.584,height=6.58
 # Define a function that builds a legend for group color
 build.group.legend  <- function(yoffset=0,groupslabels,groupcolors,elementtype = "Branch",fontfamily="'AvenirNext-Bold'")
 {
-  phosAdjust = -80
+  phosAdjust = 0
   # write the header
-  header = paste("<text x=\"-80.5995\"",
+  header = paste("<text x=\"-0.5995\"",
   " y=\"", yoffset + 8.8451, "\"",
   " font-family=\"", fontfamily, "\" ",
   " font-weight=\"700\" ",
@@ -95,7 +95,7 @@ build.group.legend  <- function(yoffset=0,groupslabels,groupcolors,elementtype =
 # Define a function that draws a rect
 drawrect <- function(x,y,fill,width=6.584,height=11.27)
 {
-  phosAdjust = -80
+  phosAdjust = 0
   rectline = paste("<rect x=\"",x,"\"",
                    " y=\"",y,"\"",
                    " fill=\"",fill,"\"",
@@ -110,9 +110,9 @@ drawrect <- function(x,y,fill,width=6.584,height=11.27)
 # Define a function that builds a legend for values
 build.value.legend  <- function(yoffset=0,minval,maxval, palette,elementtype = "Branch",fontfamily="'AvenirNext-Bold'",subtitle="test")
 {
-  phosAdjust = -80
+  phosAdjust = 0
   # write the header
-  header = paste("<text x=\"-80.5995\"",
+  header = paste("<text x=\"-0.5995\"",
                  " y=\"", yoffset + 8.8451, "\"",
                  " font-family=\"", fontfamily, "\" ",
                  " font-weight=\"700\" ",
@@ -136,7 +136,7 @@ build.value.legend  <- function(yoffset=0,minval,maxval, palette,elementtype = "
    
    yoffset = yoffset + 8.8451
    
-   subtitleline = paste("<text x=\"-95.8075\"",
+   subtitleline = paste("<text x=\"-15.8075\"",
          " y=\"", yoffset + 8.8451*1.5, "\"",
          " font-family=\"", fontfamily, "\" ",
          " font-weight=\"700\" ",
@@ -197,7 +197,7 @@ build.value.legend  <- function(yoffset=0,minval,maxval, palette,elementtype = "
 # Define a function that builds a legend for values
 build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,fontfamily="'AvenirNext-Bold'",subtitle="test")
 {
-  phosAdjust = -80
+  phosAdjust = 0
   #98.8075
   extrayoff = 0
   
@@ -207,7 +207,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
   }
   
   # write the header
-  header = paste("<text x=\"-80.5995\"",
+  header = paste("<text x=\"-0.5995\"",
                  " y=\"", yoffset + 8.8451, "\"",
                  " font-weight=\"700\" ",
                  " font-family=\"", fontfamily, "\" ",
@@ -231,7 +231,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
     
     yoffset = yoffset + 8.8451
     
-    subtitleline = paste("<text x=\"-80.5995\"",
+    subtitleline = paste("<text x=\"-0.5995\"",
                          " y=\"", yoffset + 8.8451*1.5, "\"",
                          " font-family=\"", fontfamily, "\" ",
                          " font-weight=\"700\" ",
@@ -248,7 +248,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
   
   for (i in 1:length(xs))
   {
-    circle = paste("<circle cx=\"", xs[i] - 180 ,"\"",
+    circle = paste("<circle cx=\"", xs[i] - 100 ,"\"",
                    " cy=\"", yoffset + 33.932 + extrayoff, "\"",
                    " fill=\"", "#D3D3D3", "\"",
                    " stroke=\"white\"",
@@ -258,7 +258,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
   }
   
   # add text labels
-  text.min = paste("<text x=\"",  min(xs) - 180,"\"",
+  text.min = paste("<text x=\"",  min(xs) - 100,"\"",
                    " y=\"", yoffset + 23.1251, "\"",
                    " font-size=\"", "9px", "\"",
                    " text-anchor=\"middle\"",
@@ -266,7 +266,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
                    " font-family=\"", fontfamily, "\">",
                    minval,"</text>",
                    sep="")
-  text.max = paste("<text x=\"",  max(xs) - 180,"\"",
+  text.max = paste("<text x=\"",  max(xs) - 100,"\"",
                    " y=\"", yoffset + 23.1251, "\"",
                    " font-size=\"", "9px", "\"",
                    " text-anchor=\"middle\"",
