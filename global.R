@@ -61,7 +61,7 @@ orig_svginfo$dataframe$id.HGNC[NAs] = ""
 
 # add correct header
 #orig_svginfo$header = "<svg viewBox=\"0 0 1200 775\" preserveAspectRatio=\"xMidYMid meet\"\n
-orig_svginfo$header = "<svg width=\"1200\" height=\"775\"\n
+orig_svginfo$header = "<svg width=\"1300\" height=\"775\"\n
 
 
 xmlns=\"http://www.w3.org/2000/svg\"\n
