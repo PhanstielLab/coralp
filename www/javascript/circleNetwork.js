@@ -26,7 +26,7 @@ binding.renderValue = function(el, data) {
       .attr("height", height)
       .attr("xmlns","http://www.w3.org/2000/svg");
 
-    var rtx = radius + 70,
+    var rtx = radius + 70 + 50,
         rty = radius;
 
     var svg = mainsvg
@@ -89,9 +89,11 @@ binding.renderValue = function(el, data) {
           .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
           .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
           .text(function(d) { return d.name; });
-
       // Create pseudo-element with the legend and add it to the SVG
       $(el).find('svg #circlelegend').remove();
+      //var x = 0;
+      //var y = 200;
+     // root.legend.attr("transform", "translate(" + [x, y] + ")");
       if(root.legend) {
         var pseudoSVG = $(
           '<div>' +

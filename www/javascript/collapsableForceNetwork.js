@@ -12,8 +12,8 @@ binding.renderValue = function(el, data) {
 
   if(data!=null){
 
-      var width = 940,
-          height = 800,
+      var width = 1140,
+          height = 900,
           root;
 
       var force = d3.layout.force()
