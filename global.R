@@ -61,7 +61,7 @@ orig_svginfo$dataframe$id.HGNC[NAs] = ""
 
 # add correct header
 #orig_svginfo$header = "<svg viewBox=\"0 0 1200 775\" preserveAspectRatio=\"xMidYMid meet\"\n
-orig_svginfo$header = "<svg width=\"1300\" height=\"775\"\n
+orig_svginfo$header = "<svg width=\"1250\" height=\"775\" transform=\"translate(-80,0)\"\n
 
 
 xmlns=\"http://www.w3.org/2000/svg\"\n
@@ -77,7 +77,7 @@ orig_svginfo$title = ""
 # initilize legend
 orig_svginfo$legend = c()
 
-# add node opacity
+# add node opacitys
 orig_svginfo$dataframe$node.opacity = 1
 
 # add node order
