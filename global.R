@@ -1,4 +1,3 @@
-
 #---------------------- LOAD LIBRARIES ----------------------#
 
 # load basic libraries
@@ -116,17 +115,17 @@ HM_hi = "#FA6958"
 ### Qualtative Palettes ###
 
 qualitative_palette_choices <- c('<img src="images/Erika.png">' = 'Erika',
-                               '<img src="images/Accent.png">' = 'Accent',
-                               '<img src="images/Dark2.png">' = 'Dark2',
-                               '<img src="images/Paired.png">' = 'Paired',
-                               '<img src="images/Pastel1.png">' = 'Pastel1',
-                               '<img src="images/Pastel2.png">' = 'Pastel2',
-                               '<img src="images/Set1.png">' = 'Set1',
-                               '<img src="images/Set2.png">' = 'Set2',
-                               '<img src="images/Set3.png">' = 'Set3')
+                                 '<img src="images/Accent.png">' = 'Accent',
+                                 '<img src="images/Dark2.png">' = 'Dark2',
+                                 '<img src="images/Paired.png">' = 'Paired',
+                                 '<img src="images/Pastel1.png">' = 'Pastel1',
+                                 '<img src="images/Pastel2.png">' = 'Pastel2',
+                                 '<img src="images/Set1.png">' = 'Set1',
+                                 '<img src="images/Set2.png">' = 'Set2',
+                                 '<img src="images/Set3.png">' = 'Set3')
 
 # my qualitative palettes
-Erika = c("#FA6958","#3F9FFC","#FAD53F","#B0E6C2","#B348A1","#2CD1E0","#BEC956","#7C64FF","#C2374A","#70BD93","#FFBB99","#BA97F2")
+Erika = c("#3F9FFC","#7C64FF","#FAD53F","#B0E6C2","#B348A1","#2CD1E0","#BEC956","#FA6958","#C2374A","#70BD93","#FFBB99","#BA97F2")
 Accent = brewer.pal(8,"Accent")
 Dark2 = brewer.pal(8,"Dark2")
 Paired = brewer.pal(12,"Paired")
@@ -140,7 +139,7 @@ qualpalettes = list(Erika,Accent,Dark2,Paired,Pastel1,Pastel2,Set1,Set2,Set3)
 names(qualpalettes) = c("Erika","Accent","Dark2","Paired","Pastel1","Pastel2","Set1","Set2","Set3")
 
 if (! dir.exists('www/images')) {
- dir.create('www/images', showWarnings = F) 
+  dir.create('www/images', showWarnings = F) 
 }
 
 drawmypalettes("Erika",Erika,"www/images",boxes =5)
@@ -156,12 +155,12 @@ drawmypalettes("Set3",Set3,"www/images",boxes =5)
 ### Sequential Palettes ###
 
 sequential_palette_choices <- c(
- '<img src="images/Greys.png">' = 'Greys',
- '<img src="images/Reds.png">' = 'Reds',
- '<img src="images/Oranges.png">' = 'Oranges',
- '<img src="images/Greens.png">' = 'Greens',
+  '<img src="images/Greys.png">' = 'Greys',
+  '<img src="images/Reds.png">' = 'Reds',
+  '<img src="images/Oranges.png">' = 'Oranges',
+  '<img src="images/Greens.png">' = 'Greens',
   '<img src="images/Blues.png">' = 'Blues',
- '<img src="images/Purples.png">' = 'Purples')
+  '<img src="images/Purples.png">' = 'Purples')
 
 
 # my sequential palettes
@@ -213,18 +212,18 @@ drawmypalettes("Red_Grey_Gre",Red_Grey_Gre,"www/images")
 
 # Default group color palette
 defaultpalette = colorRampPalette( c(
- "#FA6958",
- "#3F9FFC",
- "#FAD53F",
- "#B0E6C2",
- "#B348A1",
- "#2CD1E0",
- "#BEC956",
- "#7C64FF",
- "#C2374A",
- "#70BD93",
- "#FFBB99",
- "#BA97F2"
+  "#3F9FFC",
+  "#7C64FF",
+  "#FAD53F",
+  "#B0E6C2",
+  "#B348A1",
+  "#2CD1E0",
+  "#BEC956",
+  "#FA6958",
+  "#C2374A",
+  "#70BD93",
+  "#FFBB99",
+  "#BA97F2"
 ))(12)
 
 # # Default group color palette
@@ -235,12 +234,3 @@ defaultpalette = colorRampPalette( c(
 # pal_quals = row.names(brewer.pal.info[brewer.pal.info[,2]=="qual",])
 
 CurrentInfoPage = "About"
-
-
-
-
-
-
-
-
-
