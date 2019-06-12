@@ -22,7 +22,6 @@ build.group.legend.elements <- function(x=99.208,y,color,width=6.584,height=6.58
   # build the text
   textx = 110.8889
   texty = y + 4.5
-  fontsize = 9
   text = paste("<text x=\"", textx,"\"",
                " y=\"", texty, "\"",
                " font-weight=\"700\" ",
@@ -111,7 +110,7 @@ build.value.legend  <- function(yoffset=0,minval,maxval, palette,elementtype = "
                  " y=\"", yoffset + 8.8451, "\"",
                  " font-family=\"", fontfamily, "\" ",
                  " font-weight=\"700\" ",
-                 " font-size=\"14px\">", elementtype," Color</text>",
+                 " font-size=\"9px\">", elementtype," Color</text>",
                  sep="")
   
   subtitle.height = 0
@@ -135,7 +134,7 @@ build.value.legend  <- function(yoffset=0,minval,maxval, palette,elementtype = "
                          " y=\"", yoffset + 8.8451*1.5, "\"",
                          " font-family=\"", fontfamily, "\" ",
                          " font-weight=\"700\" ",
-                         " font-size=\"14px\">", subtitle,"</text>",
+                         " font-size=\"7px\">", subtitle,"</text>",
                          sep="")
   }
   
@@ -152,7 +151,7 @@ build.value.legend  <- function(yoffset=0,minval,maxval, palette,elementtype = "
   
   text.min = paste("<text x=\"", 98.8075,"\"",
                    " y=\"", yoffset + 23.1251, "\"",
-                   " font-size=\"", "14px", "\"",
+                   " font-size=\"", "5px", "\"",
                    " font-weight=\"700\" ",
                    " font-family=\"", fontfamily, "\">",
                    minval,"</text>",
@@ -160,7 +159,7 @@ build.value.legend  <- function(yoffset=0,minval,maxval, palette,elementtype = "
   
   text.mid = paste("<text x=\"", 133.8944,"\"",
                    " y=\"", yoffset + 23.1251, "\"",
-                   " font-size=\"", "14px", "\"",
+                   " font-size=\"", "5px", "\"",
                    " font-weight=\"700\" ",
                    " font-family=\"", fontfamily, "\">",
                    mean(c(minval , maxval)),"</text>",
@@ -168,7 +167,7 @@ build.value.legend  <- function(yoffset=0,minval,maxval, palette,elementtype = "
   
   text.max = paste("<text x=\"", 166.7776,"\"",
                    " y=\"", yoffset + 23.1251, "\"",
-                   " font-size=\"", "14px", "\"",
+                   " font-size=\"", "5px", "\"",
                    " font-weight=\"700\" ",
                    " font-family=\"", fontfamily,"\">",
                    maxval,"</text>",
@@ -204,7 +203,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
                  " y=\"", yoffset + 8.8451, "\"",
                  " font-weight=\"700\" ",
                  " font-family=\"", fontfamily, "\" ",
-                 " font-size=\"14px\">","Node Size</text>",
+                 " font-size=\"9px\">","Node Size</text>",
                  sep="")
   
   subtitle.height = 0
@@ -228,7 +227,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
                          " y=\"", yoffset + 8.8451*1.5, "\"",
                          " font-family=\"", fontfamily, "\" ",
                          " font-weight=\"700\" ",
-                         " font-size=\"14px\">", subtitle,"</text>",
+                         " font-size=\"7px\">", subtitle,"</text>",
                          sep="")
   }
   
@@ -253,7 +252,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
   # add text labels
   text.min = paste("<text x=\"",  min(xs),"\"",
                    " y=\"", yoffset + 23.1251 + 3, "\"",
-                   " font-size=\"", "11px", "\"",
+                   " font-size=\"", "5px", "\"",
                    " text-anchor=\"middle\"",
                    " font-weight=\"700\" ",
                    " font-family=\"", fontfamily, "\">",
@@ -261,7 +260,7 @@ build.nodesize.legend  <- function(yoffset=0,minval,maxval,minsize ,maxsize,font
                    sep="")
   text.max = paste("<text x=\"",  max(xs),"\"",
                    " y=\"", yoffset + 23.1251 + 3, "\"",
-                   " font-size=\"", "11px", "\"",
+                   " font-size=\"", "5px", "\"",
                    " text-anchor=\"middle\"",
                    " font-weight=\"700\" ",
                    " font-family=\"", fontfamily, "\">",
