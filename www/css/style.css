@@ -203,12 +203,14 @@ blockquote{
 
 .js-irs-2 .irs-single, .js-irs-2 .irs-bar-edge, .js-irs-2 .irs-bar, .js-irs-2 .irs-from, .js-irs-2 .irs-to,
 .js-irs-3 .irs-single, .js-irs-3 .irs-bar-edge, .js-irs-3 .irs-bar, .js-irs-3 .irs-from, .js-irs-3 .irs-to,
+.js-irs-4 .irs-single, .js-irs-4 .irs-bar-edge, .js-irs-4 .irs-bar, .js-irs-4 .irs-from, .js-irs-4 .irs-to,
 .js-irs-5 .irs-single, .js-irs-5 .irs-bar-edge, .js-irs-5 .irs-bar, .js-irs-5 .irs-from, .js-irs-5 .irs-to{
   background: #605587;
 }
 
 .js-irs-2 .irs-bar, .js-irs-2 .irs-bar-edge,
 .js-irs-3 .irs-bar, .js-irs-3 .irs-bar-edge,
+.js-irs-4 .irs-bar, .js-irs-4 .irs-bar-edge,
 .js-irs-5 .irs-bar, .js-irs-5 .irs-bar-edge{
   border: #605587;
 }
