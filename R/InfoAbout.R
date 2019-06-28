@@ -16,11 +16,16 @@ div(id="InfoAboutBox",
         fluidRow(width=12, 
                  column(9,
                         div(
-                         h2 ("Clear and customizable visualization of human phosphatome data", 
+                         h2 ("Clear and customizable visualization of the human phosphatome", 
                              style="color:#eceff3; font-weight: 500; font-size: 150%; letter-spacing:.4px"),
                          tags$br(),
                          
-                         h6 ("Coral is a user-friendly interactive web application for visualizing both quantitative and qualitative data. Unlike previous tools, Coral can encode data in three features (node color, node size, and branch color), allows three modes of phosphatome visualization (the traditional phosphatome tree as well as radial and dynamic-force networks) and generates high-resolution scalable vector graphic files suitable for publication without the need for refinement in graphic editing software. Due to its user-friendly, interactive, and highly customizable design, Coral is broadly applicable to high-throughput studies of the human phosphatome.",
+                         h6 ("CoralP is a user-friendly interactive web application for visualizing both quantitative and qualitative data. Qualitative and quantitative features can be represented in branch colors, node colors, and node sizes. Phosphatases can be organized using the published phosphatome tree or as radial or force directed networks.  CoralP is simple to use, well documented, and freely available. It is the first and only dedicated tool for phosphatome visualization and is widely applicable to a variety of data types including those generated from proteomic, genomic, epidemiological, and high-throughput screening experiments.",
+                             style="color:#eceff3; font-weight:300; font-size: 110%; line-height: 150%; letter-spacing:.4px"),
+
+                         tags$br(),
+                         
+                         h6 ("Visualization of human kinome data can be acheived using our kinase visualization tool ",tags$a(href="http://phanstiel-lab.med.unc.edu/CORAL/","Coral."),
                              style="color:#eceff3; font-weight:300; font-size: 110%; line-height: 150%; letter-spacing:.4px")
                         )
                  )
@@ -72,8 +77,7 @@ div(id="InfoAboutBox",
                         h4 ("Contact")
                  ),
                  column(10,
-                        h6 ("To report issues or make requests, please post an issue on our ", tags$a(href="https://github.com/PhanstielLab/CORALp/issues", "Github repo"),
-                            " or ", tags$a(href="mailto:douglas_phanstiel@med.unc.edu", "email us directly."))
+                        h6 ("To report issues or make requests, please post an issue on our ", tags$a(href="https://github.com/PhanstielLab/CORALp/issues", "Github repo."))
                  )
         ),
         tags$br(),
@@ -82,9 +86,9 @@ div(id="InfoAboutBox",
                         h4 ("Citation")
                  ),
                  column(10, 
-                        h6 ("Coral was initially described in a preprint by Metz & Deoudes et al available at ", 
+                        h6 ("We are currently preparing a manuscript describing CoralP.", 
                             tags$a(href="https://www.biorxiv.org/content/early/2018/05/25/330274", "bioRxiv",target="_blank")),
-                        h6 ("Coral makes use of phylogenetic information and Tree plots derived from ",
+                        h6 ("CoralP makes use of phylogenetic information and Tree plots derived from ",
                             tags$a(href="https://stke.sciencemag.org/content/10/474/eaag1796/tab-figures-data","Chen et al, Science, 2017.",target="_blank")),
                         tags$br(), tags$br(), tags$br(), tags$br()
                         
