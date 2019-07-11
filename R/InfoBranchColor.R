@@ -112,8 +112,8 @@ div(id="InfoBranchColorBox",
                         )
                  ),
                  column(4, 
-                        div(img(src="info/BC-2b.png",width="100%",align="left",
-                            tags$style("img[src='info/BC-2b.png'] {padding-top: 4px}")
+                        div(img(src="info/BC-2bb.png",width="100%",align="left",
+                            tags$style("img[src='info/BC-2bb.png'] {padding-top: 4px}")
                         )
                         )
                  )
