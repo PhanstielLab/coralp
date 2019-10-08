@@ -28,9 +28,10 @@ affiliations:
     index: 3
   - name: Lineberger Comprehensive Cancer Research Center, University of North Carolina, Chapel Hill, NC 27599, USA
     index: 4
-date: 08 October 2019
+date: "08 October 2019"
 bibliography: paper.bib
 
+---
 
 # Summary
 
