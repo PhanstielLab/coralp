@@ -4,10 +4,31 @@ CoralP is a user-friendly interactive web application for visualizing both quant
 
 CoralP builds off a Coral, our tool for human kinome visualization which can be found at http://phanstiel-lab.med.unc.edu/CORAL/.
 
-
 # Web App
 
 The CoralP web app can be found at http://phanstiel-lab.med.unc.edu/coralp/
+
+# Prerequisites
+
+CoralP uses a number of packages. Run the following code to install any you don't already have:
+
+```
+list.of.packages <- c(
+  "shiny", 
+  "shinydashboard", 
+  "shinyBS", 
+  "readr", 
+  "rsvg", 
+  "shinyWidgets", 
+  "RColorBrewer", 
+  "svgPanZoom", 
+  "colourpicker", 
+  "DT", 
+  "data.tree", 
+  "jsonlite")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[, "Package"])]
+if(length(new.packages)) install.packages(new.packages)
+```
 
 # Credit
 CoralP was adapated from Coral in the Phanstiel Lab at UNC by Amit Min and Erika Deoudes.
@@ -16,4 +37,4 @@ Circle and Force Layouts are written in javascript using the amazing D3 library.
 
 # Citation
 We are currently preparing a manuscript describing CoralP. bioRxiv
-CoralP makes use of phylogenetic information and Tree plots derived from Chen et al, Science, 2017.
+CoralP makes use of phylogenetic information and tree plots derived from Chen et al., Science, 2017.
