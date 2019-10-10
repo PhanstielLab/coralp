@@ -38,3 +38,7 @@ Circle and Force Layouts are written in javascript using the amazing D3 library.
 # Citation
 We are currently preparing a manuscript describing CoralP.
 CoralP makes use of phylogenetic information and tree plots derived from [Chen et al., Science Signaling, 2017](https://stke.sciencemag.org/content/10/474/eaag1796).
+
+# Contributions
+
+We welcome user feedback and contributions on this software. If you have a question or a problem, the best approach is to report it is through [GitHub's issue tracker](https://github.com/PhanstielLab/coralp/issues). If you want to propose a change to the source code, either to fix a bug or make an improvement, use a [pull request](https://github.com/PhanstielLab/coralp/pulls).
