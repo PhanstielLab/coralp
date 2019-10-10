@@ -6,11 +6,11 @@ CoralP builds off a Coral, our tool for human kinome visualization which can be 
 
 # Web App
 
-The CoralP web app can be found at http://phanstiel-lab.med.unc.edu/coralp/
+The CoralP web app can be found at http://phanstiel-lab.med.unc.edu/coralp/.
 
 # Prerequisites
 
-CoralP uses a number of packages. Run the following code to install any you don't already have:
+CoralP uses a number of packages. If you want to run the tool locally, you can use the following code to install any you don't already have:
 
 ```
 list.of.packages <- c(
