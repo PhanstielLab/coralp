@@ -36,5 +36,5 @@ Coral is written in R and relies on the following packages: shiny, shinydashboar
 Circle and Force Layouts are written in javascript using the amazing D3 library.
 
 # Citation
-We are currently preparing a manuscript describing CoralP. bioRxiv
-CoralP makes use of phylogenetic information and tree plots derived from Chen et al., Science, 2017.
+We are currently preparing a manuscript describing CoralP.
+CoralP makes use of phylogenetic information and tree plots derived from [Chen et al., Science Signaling, 2017](https://stke.sciencemag.org/content/10/474/eaag1796).
