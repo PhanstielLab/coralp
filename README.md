@@ -8,9 +8,21 @@ CoralP builds off a Coral, our tool for human kinome visualization which can be 
 
 The CoralP web app can be found at http://phanstiel-lab.med.unc.edu/coralp/.
 
-# Prerequisites
+# Running Locally
 
-CoralP uses a number of packages. If you want to run the tool locally, you can use the following code to install any you don't already have:
+The easiest way to use CoralP is via the web app linked above. But you can also run it locally if you wish.
+
+## Downloading Code
+
+The first step is to download the code. You can do this with Git:
+
+```git clone https://github.com/PhanstielLab/coralp.git```
+
+or download and extract a compressed .zip file of the latest revision of the repository from https://github.com/PhanstielLab/coralp/archive/master.zip.
+
+## Prerequisites
+
+CoralP uses a number of packages. You can use the following code in R to install any you don't already have:
 
 ```
 list.of.packages <- c(
@@ -29,6 +41,14 @@ list.of.packages <- c(
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[, "Package"])]
 if(length(new.packages)) install.packages(new.packages)
 ```
+
+## Running the App
+
+From R, run the following command:
+
+```shiny::runApp("/path/to/coralp")```
+
+and it should launch the app in your default web browser.
 
 # Credit
 CoralP was adapated from Coral in the Phanstiel Lab at UNC by Amit Min and Erika Deoudes.
