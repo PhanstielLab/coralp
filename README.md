@@ -1,5 +1,7 @@
 # CoralP
 
+http://phanstiel-lab.med.unc.edu/coralp/
+
 CoralP is a user-friendly interactive web application for visualizing both quantitative and qualitative data. Qualitative and quantitative features can be represented in branch colors, node colors, and node sizes. Phosphatases can be organized using the published phosphatome tree or as radial or force directed networks.  CoralP is simple to use, well documented, and freely available. It is the first and only dedicated tool for phosphatome visualization and is widely applicable to a variety of data types including those generated from proteomic, genomic, epidemiological, and high-throughput screening experiments.
 
 CoralP builds off a Coral, our tool for human kinome visualization which can be found at http://phanstiel-lab.med.unc.edu/CORAL/.
