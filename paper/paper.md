@@ -49,7 +49,7 @@ Numerous methods have been developed to visualize the human kinome [@Metz2018-ad
 
 # Methods
 
-CoralP was adapted from Coral and was written using R and JavaScript making use of the following libraries: shiny [@Chang2018-jb], shinydashboard [@Chang2018-ef], shinyBS [Bailey2015-ft], shinyWidgets [@Perrier2019-io], readr [@Wickham2018-zb], rsvg [@Ooms2018-tr], RColorBrewer [@Neuwirth2014-ux], and D3.js [@Bostock2011-je]. The phosphatome tree was adapted from Chen et al. and manually redrawn using Adobe Illustrator [@Chen2017-bb]. 
+CoralP was adapted from Coral and was written using R and JavaScript making use of the following libraries: shiny [@Chang2018-jb], shinydashboard [@Chang2018-ef], shinyBS [@Bailey2015-ft], shinyWidgets [@Perrier2019-io], readr [@Wickham2018-zb], rsvg [@Ooms2018-tr], RColorBrewer [@Neuwirth2014-ux], and D3.js [@Bostock2011-je]. The phosphatome tree was adapted from Chen et al. and manually redrawn using Adobe Illustrator [@Chen2017-bb]. 
 
 # Results
 
@@ -59,7 +59,7 @@ CoralP offers highly flexible methods for visualizing qualitative and quantitati
 
 For ease of use, CoralP is highly documented and freely available. For maximal reproducibility and stability, the code is open-source, version controlled, and publicly available.
 
-![**Figure 1. Section of CoralP plot showing CC1 phosphatases.** Branch and node colors depict RNA log2-fold change. Node sizes represent RNA RPKM values.](fig1.png)
+![**Section of CoralP plot showing CC1 phosphatases.** Branch and node colors depict RNA log2-fold change. Node sizes represent RNA RPKM values.](fig1.png)
 
 # Discussion
 
