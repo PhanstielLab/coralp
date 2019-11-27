@@ -1,0 +1,25 @@
+Package: coralp
+Title: CoralP
+Version: 1.0
+Date: 2019-11-26
+Author: Amit Min, Erika Deoudes, Marielle L. Bond, Eric Davis, Doug Phanstiel
+Maintainer: Doug Phanstiel <douglas_phanstiel@med.unc.edu>
+Description: Flexible visualization of the human phosphatome
+Imports:
+    shiny, 
+	shinydashboard, 
+	shinyBS, 
+	readr, 
+	rsvg, 
+	shinyWidgets, 
+	RColorBrewer, 
+	svgPanZoom, 
+	colourpicker, 
+	DT, 
+	data.tree, 
+	jsonlite
+Suggests:
+    testthat, 
+	here, 
+	grDevices
+License: MIT + file LICENSE
