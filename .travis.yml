@@ -1,12 +1,6 @@
 language: R
 sudo: false
 cache: packages
-os: osx
-addons:
-  homebrew:
-    taps: homebrew/cask
-    casks: phantomjs
-    update: true
 
 script:
  - R -f run_tests.R
