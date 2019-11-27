@@ -2,5 +2,7 @@ language: R
 sudo: false
 cache: packages
 
+install:
+
 script:
  - R -r R/tests.R
