@@ -4,8 +4,8 @@ cache: packages
 os: osx
 addons:
   homebrew:
-    packages:
-    - phantomjs
+    taps: homebrew/cask
+    casks: phantomjs
     update: true
 
 script:
