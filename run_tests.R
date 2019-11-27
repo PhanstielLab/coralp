@@ -49,5 +49,5 @@ test_that("color.by.selected() works", {
 # })
 
 test_that("CORALp works", {
-  expect_pass(testApp(".", compareImages = FALSE))
+  expect_pass(testApp(".", compareImages = TRUE))
 })
