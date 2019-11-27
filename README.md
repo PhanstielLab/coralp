@@ -1,4 +1,6 @@
-# CoralP
+[![Travis build status](https://travis-ci.org/PhanstielLab/coralp.svg?branch=master)](https://travis-ci.org/PhanstielLab/coralp)
+
+# Overview
 
 http://phanstiel-lab.med.unc.edu/coralp/
 
