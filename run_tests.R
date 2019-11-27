@@ -1,10 +1,11 @@
-library("testthat")
+library(testthat)
+library(shinytest)
 
 source(here::here("R/convertID.R"))
 source(here::here("R/map2color.R"))
 source(here::here("R/colorby.R"))
 
-test_that("convertID works", {
+test_that("convertID() works", {
   nrows<-100
   records<-data.frame(id.coral=as.character(round(runif(nrows, 32, 126))), id.other=strsplit(rawToChar(as.raw(round(runif(nrows, 32, 126)))), "")[[1]], stringsAsFactors = F)
   for(i in 1:nrows) {
@@ -21,7 +22,7 @@ test_that("convertID works", {
   }
 })
 
-test_that("map2color works", {
+test_that("map2color() works", {
   ramp<-c("deepskyblue2","black","gold")
   results<-map2color(1:3)
   for(i in length(results)) {
@@ -29,20 +30,24 @@ test_that("map2color works", {
   }
 })
 
-test_that("color.by.selected works", {
+test_that("color.by.selected() works", {
   records<-data.frame(id.coral=1:101,branch.col="black")
   results<-color.by.selected(records, 51, "black", "white")
   expect_identical(results, c(rep("black", 50), "white", rep("black", 50)))
 })
 
-# test_that("color.by.group works", {
-#   records<-data.frame(id.coral=1:101,branch.col="black")
+# test_that("color.by.group() works", {
+#   records<-NULL
 #   results<-color.by.group()
 #   expect_identical()
 # })
 # 
-# test_that("color.by.value works", {
-#   records<-data.frame(id.coral=1:101,branch.col="black")
+# test_that("color.by.value() works", {
+#   records<-NULL
 #   results<-color.by.value()
 #   expect_identical()
 # })
+
+test_that("CORALp works", {
+  expect_pass(testApp(".", compareImages = FALSE))
+})
