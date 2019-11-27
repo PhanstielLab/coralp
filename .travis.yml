@@ -3,4 +3,4 @@ sudo: false
 cache: packages
 
 script:
- - R -r R/tests.R
+ - R -f R/tests.R
