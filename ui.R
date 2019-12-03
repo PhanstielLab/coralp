@@ -200,7 +200,7 @@ ui <- dashboardPage(title="CORALp",
                                                              fluidRow( width=12,
                                                                        column(6,
                                                                               radioButtons(inputId="branchcolorpalettetype",label = "Palette Type",
-                                                                                           choices = c("sequential","divergent","manual 2-color","manual 3-color"),selected="sequential",inline = FALSE)
+                                                                                           choices = c("sequential","divergent","manual 2-color","manual 3-color"),inline = FALSE)
                                                                        ),
                                                                        
                                                                        column(6,
@@ -393,7 +393,7 @@ ui <- dashboardPage(title="CORALp",
                                                              fluidRow( width=12,
                                                                        column(6,
                                                                               radioButtons(inputId="nodecolorpalettetype",label = "Palette Type",
-                                                                                           choices = c("sequential","divergent","manual 2-color","manual 3-color"),selected="sequential",inline = FALSE)
+                                                                                           choices = c("sequential","divergent","manual 2-color","manual 3-color"),inline = FALSE)
                                                                        ),
                                                                        
                                                                        column(6,
